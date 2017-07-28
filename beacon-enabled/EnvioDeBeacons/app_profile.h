@@ -40,7 +40,7 @@ enum {
   RADIO_CHANNEL = 26,
   PAN_ID = 0x8172,
   COORDINATOR_ADDRESS = 0x4331,
-  BEACON_ORDER = 5, //macBeaconOrder describes the interval at which the coordinator shall transmit its Beacon frames
+  BEACON_ORDER = 8, //macBeaconOrder describes the interval at which the coordinator shall transmit its Beacon frames
   SUPERFRAME_ORDER = 5, //SuperframeOrder describes the length of the active portion of the superframe, which includes the Beacon frame
   TX_POWER = 0, // in dBm
 };

@@ -1,6 +1,9 @@
 
 /*
-Para debugar via serial basta aplicar o seguinte comando no terminal:
+ Autor: André Felippe Weber
+ Baseado nos trabalhos de Jan Hauer <hauer@tkn.tu-berlin.de>
+
+ Para debugar via serial basta aplicar o seguinte comando no terminal:
 
  java net.tinyos.tools.PrintfClient -comm serial@/dev/ttyUSB1:57600
 

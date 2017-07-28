@@ -1,40 +1,41 @@
 README for TestData
-Author/Contact: Jan Hauer <hauer@tkn.tu-berlin.de>
 
-Description:
+Baseado na aplicação TestData de Jan Hauer <hauer@tkn.tu-berlin.de>
 
-In this application one node takes the role of a PAN coordinator in a
-beacon-enabled 802.15.4 PAN, it transmits periodic beacons and waits for
-incoming DATA frames. A second node acts as a device, it first scans the
-pre-defined channel for beacons from the coordinator and once it finds a beacon
-it tries to synchronize to and track all future beacons. It then starts to
-transmit DATA frames to the coordinator as fast as possible (direct
-transmission in the contention access period, CAP).
-
-Criteria for a successful test:
-
-Coordinator and device should both toggle LED2 about twice per second in
-unison. They should also each toggle LED1 about 5 times per second (but
-not necessarily in unison). Note: the nodes should be close to each other, 
-because the transmission power is reduced to -20 dBm.
+Autor/Contato: André Felippe Weber <andrefelippe.weber@gmail.com>
 
 
-Tools: NONE
+Descrição:
 
-Usage: 
+Nesta aplicação um node será programado como uma coordenador de um rede PAN 
+802.15.4 com envio de beacons. Este beacon será enviado periodicamente de 
+acordo com a variável BEACON_ORDER definida no arquivo app_profile.h de acordo 
+com o padrão 802.15.4.
 
-1. Install the coordinator:
+Características de um teste bem sucedido:
 
-    $ cd coordinator; make <platform> install
+O coordenador acenderá seu LED0 (LED vermelho no MICAz) e apagará o LED1 (LED verde no MICAz)
+quando um evento IEEE154TxBeaconPayload.aboutToTransmit ocorrer indicando que um frame de beacon
+está pronto para ser enviado. O LED0 será apagado e LED1 aceso quando o beacon for enviado. 
 
-2. Install one or more devices
+Ferramentas: Nenhuma
 
-    $ cd device; make <platform> install,X
+Uso: 
 
-    where X is a pre-assigned short address and should be different 
-    for every device.
+1. Altere a permissão de acesso às interfaces USB:
 
-You can change some of the configuration parameters in app_profile.h
+    $ sudo chmod 666 /dev/ttyUSB*
+
+2. Instale a aplicação no node coordenador
+
+    $ make micaz install mib510,/dev/ttyUSB0
+
+3. Para realizar o debug da aplicação via serial:
+
+    $ java net.tinyos.tools.PrintfClient -comm serial@/dev/ttyUSB1:57600
+	
+OBS: A periodicidade de envio dos beacons pode ser alterada modificando o parametro BEACON_ORDER
+definida no arquivo app_profile.h.
 
 Known bugs/limitations:
 
@@ -43,5 +44,4 @@ Known bugs/limitations:
   62.500 Hz, +-40 ppm in the 2.4 GHz band); in this case the MAC timing 
   is not standard compliant
 
-$Id: README.txt,v 1.3 2010-01-05 17:12:56 janhauer Exp $o
 
