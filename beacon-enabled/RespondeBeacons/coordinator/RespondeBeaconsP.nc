@@ -33,6 +33,16 @@
  * ========================================================================
  */
 
+/*
+ Autor: André Felippe Weber
+ Baseado nos trabalhos de Jan Hauer <hauer@tkn.tu-berlin.de>
+
+ Para debugar via serial basta aplicar o seguinte comando no terminal:
+
+ java net.tinyos.tools.PrintfClient -comm serial@/dev/ttyUSB1:57600
+
+*/
+
 #include "TKN154.h"
 #include "app_profile.h"
 #include "printf.h"
@@ -79,20 +89,26 @@ module RespondeBeaconsP
                           0                     // BeaconSecurity
                         );
   }
-
+  bool m_ledCount;
   event message_t* MCPS_DATA.indication ( message_t* frame )
   {	
-      call Leds.led0Off();
-      call Leds.led1Off();
-      call Leds.led2On();
+    if (m_ledCount++ >= 20) {
+      m_ledCount = 0;
+      printf("Mensagem recebida do device: %s \n", call Frame.getPayload(frame)/*frame->data*/);
+      call Leds.led2Toggle();
+    }
+    return frame;
   }
 
   event void MLME_START.confirm(ieee154_status_t status) {}
 
+  bool count_teste;
   event void MCPS_DATA.confirm(message_t *msg, uint8_t msduHandle, ieee154_status_t status, uint32_t Timestamp){
+
   }
 
   event void IEEE154TxBeaconPayload.aboutToTransmit() {
+      call Leds.led1Off();
       call Leds.led0On();
   }
 
@@ -103,7 +119,8 @@ module RespondeBeaconsP
   event void IEEE154TxBeaconPayload.beaconTransmitted() 
   {
     ieee154_macBSN_t beaconSequenceNumber = call MLME_GET.macBSN();
-    //printf("Sequencia do beacon enviado: %hu ! \n", beaconSequenceNumber);
+  //  printf("Sequencia do beacon enviado: %hu ! \n", beaconSequenceNumber);
+    call Leds.led0Off();
     call Leds.led1On();
   }  
 }

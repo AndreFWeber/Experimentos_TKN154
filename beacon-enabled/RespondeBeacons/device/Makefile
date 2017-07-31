@@ -1,4 +1,5 @@
-COMPONENT=TestDataAppC
+COMPONENT=RespondeBeaconsC
+CFLAGS += -I$(TOSDIR)/lib/printf
 CFLAGS += -DIEEE154_BEACON_TX_DISABLED
 CFLAGS += -I$(shell pwd)/..
 
