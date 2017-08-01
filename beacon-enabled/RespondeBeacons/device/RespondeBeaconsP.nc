@@ -31,6 +31,14 @@
  * $Date: 2010-01-05 17:12:56 $
  * @author: Jan Hauer <hauer@tkn.tu-berlin.de>
  * ========================================================================
+ *
+ *
+ * Modificado em 25/07/2017 por André Felippe Weber
+ *
+ * Para debugar via serial basta aplicar o seguinte comando no terminal:
+ *
+ * java net.tinyos.tools.PrintfClient -comm serial@/dev/ttyUSB1:57600
+ *
  */
 
 #include "TKN154.h"
@@ -118,6 +126,8 @@ module RespondeBeaconsP
     ieee154_phyCurrentPage_t page = call MLME_GET.phyCurrentPage();
     ieee154_macBSN_t beaconSequenceNumber = call BeaconFrame.getBSN(frame);
 
+    printf("Sequencia do beacon recebido: %hu ! \n", beaconSequenceNumber);
+
     if (!m_wasScanSuccessful) {
       // received a beacon during channel scanning
       if (call BeaconFrame.parsePANDescriptor(
@@ -132,10 +142,8 @@ module RespondeBeaconsP
       }
     } else { 
       // received a beacon during synchronization, toggle LED1
-      if (beaconSequenceNumber & 1)
-        call Leds.led1On();
-      else
-        call Leds.led1Off();
+      call Leds.led1Toggle();
+
     }
 
     return frame;
@@ -180,7 +188,9 @@ module RespondeBeaconsP
           0,                                // msduHandle,
           TX_OPTIONS_ACK // TxOptions,
           ) != IEEE154_SUCCESS)
-      call Leds.led0On();
+      		call Leds.led0On();
+	//else
+	//	printf("Frame enviado com sucesso! Conteúdo da mensagem: %s ! \n", call Frame.getPayload(&m_frame));
   }
 
   event void MCPS_DATA.confirm    (
