@@ -1,0 +1,133 @@
+/*
+ Autor: André Felippe Weber
+ Baseado nos trabalhos de Jan Hauer <hauer@tkn.tu-berlin.de>
+
+ Para debugar via serial basta aplicar o seguinte comando no terminal:
+
+ java net.tinyos.tools.PrintfClient -comm serial@/dev/ttyUSB1:57600
+
+*/
+
+#include "TKN154.h"
+#include "app_profile.h"
+#include "printf.h"
+
+module ConectaEtrocaMsgP
+{
+  uses {
+    interface Boot;
+    interface MCPS_DATA;
+    interface MLME_RESET;
+    interface MLME_START;
+    interface MLME_SET;
+    interface MLME_GET;
+    interface MLME_ASSOCIATE;
+    interface MLME_DISASSOCIATE;
+    interface MLME_COMM_STATUS;
+    interface IEEE154Frame as Frame;
+    interface Leds;
+  }
+} implementation {
+
+  bool m_ledCount;
+
+  event void Boot.booted() {
+    call MLME_RESET.request(TRUE);
+  }
+
+  event void MLME_RESET.confirm(ieee154_status_t status)
+  {
+    if (status != IEEE154_SUCCESS)
+      return;
+    call MLME_SET.phyTransmitPower(TX_POWER);
+    call MLME_SET.macShortAddress(COORDINATOR_ADDRESS);
+    call MLME_SET.macAssociationPermit(TRUE);
+    //call MLME_SET.macRxOnWhenIdle(TRUE);
+
+    call MLME_START.request(
+                          PAN_ID,               // PANId
+                          RADIO_CHANNEL,        // LogicalChannel
+                          0,                    // ChannelPage,
+                          0,                    // StartTime,
+                          BEACON_ORDER,         // BeaconOrder
+                          SUPERFRAME_ORDER,     // SuperframeOrder
+                          TRUE,                 // PANCoordinator
+                          FALSE,                // BatteryLifeExtension
+                          FALSE,                // CoordRealignment
+                          0,                    // CoordRealignSecurity,
+                          0                     // BeaconSecurity
+                        );
+  }
+
+  event void MLME_START.confirm(ieee154_status_t status) {}
+
+/**********Associação*************/
+  uint16_t m_shortAddress;
+  event void MLME_ASSOCIATE.indication (
+                          uint64_t DeviceAddress,
+                          ieee154_CapabilityInformation_t CapabilityInformation,
+                          ieee154_security_t *security
+                        )
+  {
+    call MLME_ASSOCIATE.response(DeviceAddress, m_shortAddress++, IEEE154_ASSOCIATION_SUCCESSFUL, 0);
+  }
+
+  event void MLME_DISASSOCIATE.indication (
+                          uint64_t DeviceAddress,
+                          ieee154_disassociation_reason_t DisassociateReason,
+                          ieee154_security_t *security
+                        )
+  {
+    call Leds.led1Off();
+  }
+
+
+  event void MLME_COMM_STATUS.indication (
+                          uint16_t PANId,
+                          uint8_t SrcAddrMode,
+                          ieee154_address_t SrcAddr,
+                          uint8_t DstAddrMode,
+                          ieee154_address_t DstAddr,
+                          ieee154_status_t status,
+                          ieee154_security_t *security
+                        )
+  {
+    if (status == IEEE154_SUCCESS){
+      // association was successful
+      call Leds.led1On();
+      m_lastDevice.extendedAddress = DstAddr.extendedAddress;
+    } else {
+      call Leds.led1Off();
+    }
+  }
+
+  event void MLME_DISASSOCIATE.confirm    (
+                          ieee154_status_t status,
+                          uint8_t DeviceAddrMode,
+                          uint16_t DevicePANID,
+                          ieee154_address_t DeviceAddress
+                        ){}
+
+  event void MLME_ASSOCIATE.confirm    (
+                          uint16_t AssocShortAddress,
+                          uint8_t status,
+                          ieee154_security_t *security
+                        ){}
+
+/*********Recepção de dados***********/
+
+
+  bool m_ledCount;
+  event message_t* MCPS_DATA.indication ( message_t* frame )
+  {	
+    if (m_ledCount++ >= 20) {
+      m_ledCount = 0;
+      printf("Mensagem recebida do device: %s \n", call Frame.getPayload(frame)/*frame->data*/);
+      call Leds.led2Toggle();
+    }
+    return frame;
+  }
+
+  event void MCPS_DATA.confirm(message_t *msg, uint8_t msduHandle, ieee154_status_t status, uint32_t Timestamp){  }
+
+}
