@@ -39,18 +39,13 @@ configuration RespondeBeaconsC
 } implementation {
   components MainC;
   components LedsC;
-  components Ieee802154BeaconEnabledC as MAC;
+  components Ieee802154NonBeaconEnabledC as MAC;
   components PrintfC;
   components SerialStartC;
   components RespondeBeaconsP as App;
 
-  App.MLME_SCAN -> MAC;
-  App.MLME_SYNC -> MAC;
-  App.MLME_BEACON_NOTIFY -> MAC;
-  App.MLME_SYNC_LOSS -> MAC;
   App.MCPS_DATA -> MAC;
   App.Frame -> MAC;
-  App.BeaconFrame -> MAC;
   App.Packet -> MAC;
 
   MainC.Boot <- App;
@@ -58,4 +53,7 @@ configuration RespondeBeaconsC
   App.MLME_RESET -> MAC;
   App.MLME_SET -> MAC;
   App.MLME_GET -> MAC;
+  App.MLME_ASSOCIATE -> MAC;
+  App.MLME_DISASSOCIATE -> MAC;
+  App.MLME_COMM_STATUS -> MAC;
 }

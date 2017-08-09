@@ -1,6 +1,5 @@
 COMPONENT=RespondeBeaconsC
 CFLAGS += -I$(TOSDIR)/lib/printf
-CFLAGS += -DIEEE154_BEACON_TX_DISABLED
 CFLAGS += -I$(shell pwd)/..
 
 # To use the TKN15.4 MAC instead of a platform's default MAC protocol first

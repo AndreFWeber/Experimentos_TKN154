@@ -244,11 +244,11 @@ typedef struct { unsigned char nxdata[2]; } __attribute__((packed)) nxle_uint16_
 typedef struct { unsigned char nxdata[4]; } __attribute__((packed)) nxle_uint32_t;typedef uint32_t __nesc_nxbase_nxle_uint32_t  ;
 typedef struct { unsigned char nxdata[8]; } __attribute__((packed)) nxle_uint64_t;typedef uint64_t __nesc_nxbase_nxle_uint64_t  ;
 # 117 "/usr/lib/gcc/avr/4.8.2/../../../avr/include/string.h" 3
-extern void *memcpy(void *arg_0x2b24114031f0, const void *arg_0x2b24114034c8, size_t arg_0x2b2411403770);
+extern void *memcpy(void *arg_0x2b747b8ce1f0, const void *arg_0x2b747b8ce4c8, size_t arg_0x2b747b8ce770);
 
 
 
-extern void *memset(void *arg_0x2b2411406020, int arg_0x2b2411406288, size_t arg_0x2b2411406530);
+extern void *memset(void *arg_0x2b747b8d1020, int arg_0x2b747b8d1288, size_t arg_0x2b747b8d1530);
 # 71 "/usr/lib/gcc/avr/4.8.2/../../../avr/include/stdlib.h" 3
 #line 68
 typedef struct __nesc_unnamed4242 {
@@ -267,7 +267,7 @@ typedef struct __nesc_unnamed4243 {
 } ldiv_t;
 
 
-typedef int (*__compar_fn_t)(const void *arg_0x2b241142d838, const void *arg_0x2b241142db10);
+typedef int (*__compar_fn_t)(const void *arg_0x2b747b8f8838, const void *arg_0x2b747b8f8b10);
 # 25 "/usr/src/tinyos/tos/system/tos.h"
 typedef uint8_t bool;
 enum __nesc_unnamed4244 {
@@ -876,14 +876,11 @@ enum __nesc_unnamed4297 {
 enum __nesc_unnamed4298 {
   PLATFORM_BAUDRATE = 57600L
 };
-# 39 "/home/weber/bolsa/hello/tinyos-main/apps/Experimentos_TKN154/nonbeacon-enabled/ConectaEtrocaMsg/coordinator/../app_profile.h"
+# 39 "/home/andrefw/bolsa/hello/tinyos-main/apps/Experimentos_TKN154/nonbeacon-enabled/ConectaEtrocaMsg/coordinator/../app_profile.h"
 enum __nesc_unnamed4299 {
   RADIO_CHANNEL = 26, 
-  PAN_ID = 0x8172, 
-  COORDINATOR_ADDRESS = 0x4331, 
-  BEACON_ORDER = 15, 
-  SUPERFRAME_ORDER = 15, 
-  TX_POWER = 0
+  PAN_ID = 0x9678, 
+  COORDINATOR_ADDRESS = 0x7722
 };
 # 43 "/usr/src/tinyos/tos/types/Leds.h"
 enum __nesc_unnamed4300 {
@@ -2161,8 +2158,8 @@ struct __file {
 #line 261
   int size;
   int len;
-  int (*put)(char arg_0x2b2412cad020, struct __file *arg_0x2b2412cad360);
-  int (*get)(struct __file *arg_0x2b2412cada50);
+  int (*put)(char arg_0x2b747d178020, struct __file *arg_0x2b747d178360);
+  int (*get)(struct __file *arg_0x2b747d178a50);
   void *udata;
 };
 #line 405
@@ -2565,7 +2562,7 @@ static void /*HplAtm128GeneralIOC.PortA.Bit1*/HplAtm128GeneralIOPinP__1__IO__clr
 static void /*HplAtm128GeneralIOC.PortA.Bit2*/HplAtm128GeneralIOPinP__2__IO__makeOutput(void );
 #line 40
 static void /*HplAtm128GeneralIOC.PortA.Bit2*/HplAtm128GeneralIOPinP__2__IO__set(void );
-
+static void /*HplAtm128GeneralIOC.PortA.Bit2*/HplAtm128GeneralIOPinP__2__IO__clr(void );
 
 
 static void /*HplAtm128GeneralIOC.PortA.Bit4*/HplAtm128GeneralIOPinP__4__IO__makeInput(void );
@@ -2621,11 +2618,11 @@ static uint16_t MeasureClockC__Atm128Calibrate__baudrateRegister(uint32_t baudra
 # 67 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
 static error_t SchedulerBasicP__TaskBasic__postTask(
 # 56 "/usr/src/tinyos/tos/system/SchedulerBasicP.nc"
-uint8_t arg_0x2b2411567ab0);
+uint8_t arg_0x2b747ba32ab0);
 # 75 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
 static void SchedulerBasicP__TaskBasic__default__runTask(
 # 56 "/usr/src/tinyos/tos/system/SchedulerBasicP.nc"
-uint8_t arg_0x2b2411567ab0);
+uint8_t arg_0x2b747ba32ab0);
 # 57 "/usr/src/tinyos/tos/interfaces/Scheduler.nc"
 static void SchedulerBasicP__Scheduler__init(void );
 #line 72
@@ -2644,6 +2641,8 @@ static void LedsP__Leds__led1On(void );
 static void LedsP__Leds__led2Toggle(void );
 #line 77
 static void LedsP__Leds__led1Off(void );
+#line 56
+static void LedsP__Leds__led0On(void );
 # 51 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 static void DataP__DeviceCapTx__transmitDone(ieee154_txframe_t *txFrame, ieee154_status_t status);
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameRx.nc"
@@ -2755,7 +2754,9 @@ static PibP__GetLocalExtendedAddress__val_t PibP__GetLocalExtendedAddress__get(v
 static void PibP__RadioOff__offDone(void );
 # 51 "/usr/src/tinyos/tos/interfaces/GetNow.nc"
 static PibP__IsRadioTokenRequested__data_type PibP__IsRadioTokenRequested__getNow(void );
-# 75 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_SET.nc"
+# 146 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_SET.nc"
+static ieee154_status_t PibP__MLME_SET__macRxOnWhenIdle(ieee154_macRxOnWhenIdle_t value);
+#line 75
 static ieee154_status_t PibP__MLME_SET__macAssociationPermit(ieee154_macAssociationPermit_t value);
 #line 98
 static ieee154_status_t PibP__MLME_SET__macBeaconOrder(ieee154_macBeaconOrder_t value);
@@ -2775,8 +2776,6 @@ static ieee154_status_t PibP__MLME_SET__macShortAddress(ieee154_macShortAddress_
 
 
 static ieee154_status_t PibP__MLME_SET__macAssociatedPANCoord(ieee154_macAssociatedPANCoord_t value);
-#line 60
-static ieee154_status_t PibP__MLME_SET__phyTransmitPower(ieee154_phyTransmitPower_t value);
 #line 113
 static ieee154_status_t PibP__MLME_SET__macCoordShortAddress(ieee154_macCoordShortAddress_t value);
 #line 108
@@ -2798,7 +2797,7 @@ static void PibP__radioControlStopTask__runTask(void );
 # 74 "/usr/src/tinyos/tos/interfaces/Notify.nc"
 static void PibP__PIBUpdate__default__notify(
 # 59 "/usr/src/tinyos/tos/lib/mac/tkn154/PibP.nc"
-uint8_t arg_0x2b24119e5d98, 
+uint8_t arg_0x2b747beb0d98, 
 # 74 "/usr/src/tinyos/tos/interfaces/Notify.nc"
 PibP__PIBUpdate__val_t val);
 # 37 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameUtility.nc"
@@ -2830,19 +2829,19 @@ bool SetDefaultPIB);
 # 66 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioTx.nc"
 static error_t RadioControlImplP__MacTx__transmit(
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bcf060, 
+uint8_t arg_0x2b747c09a060, 
 # 66 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioTx.nc"
 ieee154_txframe_t *frame, uint32_t t0, uint32_t dt);
 #line 83
 static void RadioControlImplP__MacTx__default__transmitDone(
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bcf060, 
+uint8_t arg_0x2b747c09a060, 
 # 83 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioTx.nc"
 ieee154_txframe_t *frame, error_t result);
 # 56 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
 static error_t RadioControlImplP__MacRx__enableRx(
 # 42 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bd0020, 
+uint8_t arg_0x2b747c09b020, 
 # 56 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
 uint32_t t0, uint32_t dt);
 
@@ -2855,15 +2854,15 @@ uint32_t t0, uint32_t dt);
 
 static void RadioControlImplP__MacRx__default__enableRxDone(
 # 42 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bd0020);
+uint8_t arg_0x2b747c09b020);
 # 73 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
 static bool RadioControlImplP__MacRx__isReceiving(
 # 42 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bd0020);
+uint8_t arg_0x2b747c09b020);
 # 84 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
 static message_t *RadioControlImplP__MacRx__default__received(
 # 42 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bd0020, 
+uint8_t arg_0x2b747c09b020, 
 # 84 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
 message_t *frame);
 # 83 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioTx.nc"
@@ -2873,13 +2872,13 @@ static void RadioControlImplP__PhyUnslottedCsmaCa__transmitDone(ieee154_txframe_
 #line 62
 static error_t RadioControlImplP__UnslottedCsmaCa__transmit(
 # 45 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bcec20, 
+uint8_t arg_0x2b747c099c20, 
 # 62 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/UnslottedCsmaCa.nc"
 ieee154_txframe_t *frame, ieee154_csma_t *csma);
 #line 89
 static void RadioControlImplP__UnslottedCsmaCa__default__transmitDone(
 # 45 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bcec20, 
+uint8_t arg_0x2b747c099c20, 
 # 89 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/UnslottedCsmaCa.nc"
 ieee154_txframe_t *frame, ieee154_csma_t *csma, bool ackPendingFlag, error_t result);
 # 53 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioOff.nc"
@@ -2887,15 +2886,15 @@ static void RadioControlImplP__PhyRadioOff__offDone(void );
 #line 53
 static void RadioControlImplP__MacRadioOff__default__offDone(
 # 46 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bcc9b8);
+uint8_t arg_0x2b747c0979b8);
 # 47 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioOff.nc"
 static error_t RadioControlImplP__MacRadioOff__off(
 # 46 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bcc9b8);
+uint8_t arg_0x2b747c0979b8);
 # 60 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioOff.nc"
 static bool RadioControlImplP__MacRadioOff__isOff(
 # 46 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bcc9b8);
+uint8_t arg_0x2b747c0979b8);
 # 65 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
 static void RadioControlImplP__PhyRx__enableRxDone(void );
 #line 84
@@ -2926,31 +2925,31 @@ static resource_client_id_t /*RadioControlP.Queue*/RoundRobinResourceQueueC__0__
 # 53 "/usr/src/tinyos/tos/interfaces/ResourceRequested.nc"
 static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceRequested__default__requested(
 # 53 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c27020);
+uint8_t arg_0x2b747c0f2020);
 # 65 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
 static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__default__unconfigure(
 # 57 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c26538);
+uint8_t arg_0x2b747c0f1538);
 # 59 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
 static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__default__configure(
 # 57 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c26538);
+uint8_t arg_0x2b747c0f1538);
 # 98 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/TransferableResource.nc"
 static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource__default__granted(
 # 52 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c2aad8);
+uint8_t arg_0x2b747c0f5ad8);
 # 137 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/TransferableResource.nc"
 static error_t /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource__release(
 # 52 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c2aad8);
+uint8_t arg_0x2b747c0f5ad8);
 # 145 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/TransferableResource.nc"
 static bool /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource__isOwner(
 # 52 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c2aad8);
+uint8_t arg_0x2b747c0f5ad8);
 # 84 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/TransferableResource.nc"
 static error_t /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource__request(
 # 52 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c2aad8);
+uint8_t arg_0x2b747c0f5ad8);
 # 98 "/usr/src/tinyos/tos/interfaces/ArbiterInfo.nc"
 static uint8_t /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ArbiterInfo__userId(void );
 # 75 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
@@ -2960,7 +2959,7 @@ static ieee154_status_t DispatchUnslottedCsmaP__FrameTx__transmit(ieee154_txfram
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameExtracted.nc"
 static message_t *DispatchUnslottedCsmaP__FrameExtracted__default__received(
 # 57 "/usr/src/tinyos/tos/lib/mac/tkn154/DispatchUnslottedCsmaP.nc"
-uint8_t arg_0x2b2411c85bf8, 
+uint8_t arg_0x2b747c150bf8, 
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameExtracted.nc"
 message_t *rxFrame, ieee154_txframe_t *txFrame);
 # 65 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
@@ -2987,7 +2986,7 @@ ieee154_security_t *beaconSecurity);
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameRx.nc"
 static message_t *DispatchUnslottedCsmaP__FrameRx__default__received(
 # 56 "/usr/src/tinyos/tos/lib/mac/tkn154/DispatchUnslottedCsmaP.nc"
-uint8_t arg_0x2b2411c60ba0, 
+uint8_t arg_0x2b747c12bba0, 
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameRx.nc"
 message_t *frame);
 # 98 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/TransferableResource.nc"
@@ -3013,7 +3012,7 @@ static void DispatchUnslottedCsmaP__signalStartConfirmTask__runTask(void );
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 static ieee154_status_t /*TKN154NonBeaconEnabledP.DispatchQueueP*/DispatchQueueP__0__FrameTx__transmit(
 # 40 "/usr/src/tinyos/tos/lib/mac/tkn154/DispatchQueueP.nc"
-uint8_t arg_0x2b2411d2f350, 
+uint8_t arg_0x2b747c1fa350, 
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 ieee154_txframe_t *txFrame);
 
@@ -3025,7 +3024,7 @@ ieee154_txframe_t *txFrame);
 
 static void /*TKN154NonBeaconEnabledP.DispatchQueueP*/DispatchQueueP__0__FrameTx__default__transmitDone(
 # 40 "/usr/src/tinyos/tos/lib/mac/tkn154/DispatchQueueP.nc"
-uint8_t arg_0x2b2411d2f350, 
+uint8_t arg_0x2b747c1fa350, 
 # 51 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 ieee154_txframe_t *txFrame, ieee154_status_t status);
 # 75 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
@@ -3039,7 +3038,7 @@ static void IndirectTxP__IndirectTxTimeout__fired(void );
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 static ieee154_status_t IndirectTxP__FrameTx__transmit(
 # 42 "/usr/src/tinyos/tos/lib/mac/tkn154/IndirectTxP.nc"
-uint8_t arg_0x2b2411d70390, 
+uint8_t arg_0x2b747c23b390, 
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 ieee154_txframe_t *txFrame);
 
@@ -3051,7 +3050,7 @@ ieee154_txframe_t *txFrame);
 
 static void IndirectTxP__FrameTx__default__transmitDone(
 # 42 "/usr/src/tinyos/tos/lib/mac/tkn154/IndirectTxP.nc"
-uint8_t arg_0x2b2411d70390, 
+uint8_t arg_0x2b747c23b390, 
 # 51 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 ieee154_txframe_t *txFrame, ieee154_status_t status);
 # 55 "/usr/src/tinyos/tos/interfaces/Get.nc"
@@ -3071,7 +3070,7 @@ static message_t *PollP__DataExtracted__received(message_t *rxFrame, ieee154_txf
 # 46 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/DataRequest.nc"
 static ieee154_status_t PollP__DataRequest__poll(
 # 46 "/usr/src/tinyos/tos/lib/mac/tkn154/PollP.nc"
-uint8_t arg_0x2b2411df0280, 
+uint8_t arg_0x2b747c2bb280, 
 # 46 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/DataRequest.nc"
 uint8_t CoordAddrMode, uint16_t CoordPANId, uint8_t *CoordAddressLE, uint8_t SrcAddrMode);
 
@@ -3081,7 +3080,7 @@ uint8_t CoordAddrMode, uint16_t CoordPANId, uint8_t *CoordAddressLE, uint8_t Src
 
 static void PollP__DataRequest__default__pollDone(
 # 46 "/usr/src/tinyos/tos/lib/mac/tkn154/PollP.nc"
-uint8_t arg_0x2b2411df0280);
+uint8_t arg_0x2b747c2bb280);
 # 62 "/usr/src/tinyos/tos/interfaces/Init.nc"
 static error_t PollP__Init__init(void );
 # 73 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_POLL.nc"
@@ -3338,7 +3337,7 @@ static void CC2420TKN154P__RadioPromiscuousMode__set(CC2420TKN154P__RadioPromisc
 # 74 "/usr/src/tinyos/tos/interfaces/Notify.nc"
 static void CC2420TKN154P__PIBUpdate__notify(
 # 57 "/usr/src/tinyos/tos/chips/cc2420_tkn154/CC2420TKN154P.nc"
-uint8_t arg_0x2b2412248020, 
+uint8_t arg_0x2b747c713020, 
 # 74 "/usr/src/tinyos/tos/interfaces/Notify.nc"
 CC2420TKN154P__PIBUpdate__val_t val);
 # 132 "/usr/src/tinyos/tos/chips/cc2420_tkn154/CC2420AsyncSplitControl.nc"
@@ -3569,31 +3568,31 @@ error_t error);
 # 62 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 static error_t CC2420SpiP__Fifo__continueRead(
 # 46 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412641ca8, 
+uint8_t arg_0x2b747cb0cca8, 
 # 62 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length);
 #line 91
 static void CC2420SpiP__Fifo__default__writeDone(
 # 46 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412641ca8, 
+uint8_t arg_0x2b747cb0cca8, 
 # 91 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length, error_t error);
 #line 82
 static cc2420_status_t CC2420SpiP__Fifo__write(
 # 46 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412641ca8, 
+uint8_t arg_0x2b747cb0cca8, 
 # 82 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length);
 #line 51
 static cc2420_status_t CC2420SpiP__Fifo__beginRead(
 # 46 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412641ca8, 
+uint8_t arg_0x2b747cb0cca8, 
 # 51 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length);
 #line 71
 static void CC2420SpiP__Fifo__default__readDone(
 # 46 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412641ca8, 
+uint8_t arg_0x2b747cb0cca8, 
 # 71 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length, error_t error);
 # 31 "/usr/src/tinyos/tos/chips/cc2420/interfaces/ChipSpiResource.nc"
@@ -3611,13 +3610,13 @@ static void CC2420SpiP__SpiResource__granted(void );
 # 63 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Ram.nc"
 static cc2420_status_t CC2420SpiP__Ram__write(
 # 47 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint16_t arg_0x2b2412640e68, 
+uint16_t arg_0x2b747cb0be68, 
 # 63 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Ram.nc"
 uint8_t offset, uint8_t * data, uint8_t length);
 # 55 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Register.nc"
 static cc2420_status_t CC2420SpiP__Reg__read(
 # 48 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412690b98, 
+uint8_t arg_0x2b747cb5bb98, 
 # 55 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Register.nc"
 uint16_t *data);
 
@@ -3629,55 +3628,55 @@ uint16_t *data);
 
 static cc2420_status_t CC2420SpiP__Reg__write(
 # 48 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412690b98, 
+uint8_t arg_0x2b747cb5bb98, 
 # 63 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Register.nc"
 uint16_t data);
 # 120 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t CC2420SpiP__Resource__release(
 # 45 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412642a68);
+uint8_t arg_0x2b747cb0da68);
 # 97 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t CC2420SpiP__Resource__immediateRequest(
 # 45 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412642a68);
+uint8_t arg_0x2b747cb0da68);
 # 88 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t CC2420SpiP__Resource__request(
 # 45 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412642a68);
+uint8_t arg_0x2b747cb0da68);
 # 102 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static void CC2420SpiP__Resource__default__granted(
 # 45 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412642a68);
+uint8_t arg_0x2b747cb0da68);
 # 128 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static bool CC2420SpiP__Resource__isOwner(
 # 45 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412642a68);
+uint8_t arg_0x2b747cb0da68);
 # 75 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
 static void CC2420SpiP__grant__runTask(void );
 # 53 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Strobe.nc"
 static cc2420_status_t CC2420SpiP__Strobe__strobe(
 # 49 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b241268e8f0);
+uint8_t arg_0x2b747cb598f0);
 # 62 "/usr/src/tinyos/tos/interfaces/Init.nc"
 static error_t StateImplP__Init__init(void );
 # 56 "/usr/src/tinyos/tos/interfaces/State.nc"
 static void StateImplP__State__toIdle(
 # 67 "/usr/src/tinyos/tos/system/StateImplP.nc"
-uint8_t arg_0x2b24126bdd50);
+uint8_t arg_0x2b747cb88d50);
 # 66 "/usr/src/tinyos/tos/interfaces/State.nc"
 static bool StateImplP__State__isState(
 # 67 "/usr/src/tinyos/tos/system/StateImplP.nc"
-uint8_t arg_0x2b24126bdd50, 
+uint8_t arg_0x2b747cb88d50, 
 # 66 "/usr/src/tinyos/tos/interfaces/State.nc"
 uint8_t myState);
 #line 61
 static bool StateImplP__State__isIdle(
 # 67 "/usr/src/tinyos/tos/system/StateImplP.nc"
-uint8_t arg_0x2b24126bdd50);
+uint8_t arg_0x2b747cb88d50);
 # 45 "/usr/src/tinyos/tos/interfaces/State.nc"
 static error_t StateImplP__State__requestState(
 # 67 "/usr/src/tinyos/tos/system/StateImplP.nc"
-uint8_t arg_0x2b24126bdd50, 
+uint8_t arg_0x2b747cb88d50, 
 # 45 "/usr/src/tinyos/tos/interfaces/State.nc"
 uint8_t reqState);
 # 75 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
@@ -3700,7 +3699,7 @@ uint16_t len);
 # 102 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static void Atm128SpiP__ResourceArbiter__granted(
 # 99 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b241271d060);
+uint8_t arg_0x2b747cbe8060);
 # 45 "/usr/src/tinyos/tos/interfaces/SpiByte.nc"
 static uint8_t Atm128SpiP__SpiByte__write(uint8_t tx);
 # 109 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128Spi.nc"
@@ -3708,23 +3707,23 @@ static void Atm128SpiP__Spi__dataReady(uint8_t data);
 # 120 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t Atm128SpiP__Resource__release(
 # 95 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b24126e6ae0);
+uint8_t arg_0x2b747cbb1ae0);
 # 97 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t Atm128SpiP__Resource__immediateRequest(
 # 95 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b24126e6ae0);
+uint8_t arg_0x2b747cbb1ae0);
 # 88 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t Atm128SpiP__Resource__request(
 # 95 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b24126e6ae0);
+uint8_t arg_0x2b747cbb1ae0);
 # 102 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static void Atm128SpiP__Resource__default__granted(
 # 95 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b24126e6ae0);
+uint8_t arg_0x2b747cbb1ae0);
 # 128 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static bool Atm128SpiP__Resource__isOwner(
 # 95 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b24126e6ae0);
+uint8_t arg_0x2b747cbb1ae0);
 # 89 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128Spi.nc"
 static void HplAtm128SpiP__SPI__sleep(void );
 #line 83
@@ -3778,35 +3777,35 @@ static resource_client_id_t /*Atm128SpiC.Arbiter.Queue*/FcfsResourceQueueC__0__F
 # 53 "/usr/src/tinyos/tos/interfaces/ResourceRequested.nc"
 static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__default__requested(
 # 52 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412804408);
+uint8_t arg_0x2b747cccf408);
 # 61 "/usr/src/tinyos/tos/interfaces/ResourceRequested.nc"
 static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__default__immediateRequested(
 # 52 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412804408);
+uint8_t arg_0x2b747cccf408);
 # 65 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
 static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__default__unconfigure(
 # 56 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412803920);
+uint8_t arg_0x2b747ccce920);
 # 59 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
 static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__default__configure(
 # 56 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412803920);
+uint8_t arg_0x2b747ccce920);
 # 120 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__release(
 # 51 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412805258);
+uint8_t arg_0x2b747ccd0258);
 # 97 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__immediateRequest(
 # 51 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412805258);
+uint8_t arg_0x2b747ccd0258);
 # 88 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__request(
 # 51 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412805258);
+uint8_t arg_0x2b747ccd0258);
 # 128 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static bool /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__isOwner(
 # 51 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412805258);
+uint8_t arg_0x2b747ccd0258);
 # 90 "/usr/src/tinyos/tos/interfaces/ArbiterInfo.nc"
 static bool /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ArbiterInfo__inUse(void );
 # 75 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
@@ -3954,25 +3953,25 @@ static void /*Ieee802154NonBeaconEnabledC.PHYAlarm1.Alarm62500hz32P*/Alarm62500h
 #line 109
 static Alarm32khzTo62500hzTransformC__Alarm__size_type Alarm32khzTo62500hzTransformC__Alarm__getNow(
 # 38 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad4448);
+uint8_t arg_0x2b747cf9f448);
 # 78 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void Alarm32khzTo62500hzTransformC__Alarm__default__fired(
 # 38 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad4448);
+uint8_t arg_0x2b747cf9f448);
 # 103 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void Alarm32khzTo62500hzTransformC__Alarm__startAt(
 # 38 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad4448, 
+uint8_t arg_0x2b747cf9f448, 
 # 103 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 Alarm32khzTo62500hzTransformC__Alarm__size_type t0, Alarm32khzTo62500hzTransformC__Alarm__size_type dt);
 #line 116
 static Alarm32khzTo62500hzTransformC__Alarm__size_type Alarm32khzTo62500hzTransformC__Alarm__getAlarm(
 # 38 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad4448);
+uint8_t arg_0x2b747cf9f448);
 # 66 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void Alarm32khzTo62500hzTransformC__Alarm__start(
 # 38 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad4448, 
+uint8_t arg_0x2b747cf9f448, 
 # 66 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 Alarm32khzTo62500hzTransformC__Alarm__size_type dt);
 
@@ -3983,23 +3982,23 @@ Alarm32khzTo62500hzTransformC__Alarm__size_type dt);
 
 static void Alarm32khzTo62500hzTransformC__Alarm__stop(
 # 38 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad4448);
+uint8_t arg_0x2b747cf9f448);
 # 109 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static Alarm32khzTo62500hzTransformC__AlarmFrom__size_type Alarm32khzTo62500hzTransformC__AlarmFrom__default__getNow(
 # 39 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad0c38);
+uint8_t arg_0x2b747cf9bc38);
 # 78 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void Alarm32khzTo62500hzTransformC__AlarmFrom__fired(
 # 39 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad0c38);
+uint8_t arg_0x2b747cf9bc38);
 # 116 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static Alarm32khzTo62500hzTransformC__AlarmFrom__size_type Alarm32khzTo62500hzTransformC__AlarmFrom__default__getAlarm(
 # 39 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad0c38);
+uint8_t arg_0x2b747cf9bc38);
 # 66 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void Alarm32khzTo62500hzTransformC__AlarmFrom__default__start(
 # 39 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad0c38, 
+uint8_t arg_0x2b747cf9bc38, 
 # 66 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 Alarm32khzTo62500hzTransformC__AlarmFrom__size_type dt);
 
@@ -4010,7 +4009,7 @@ Alarm32khzTo62500hzTransformC__AlarmFrom__size_type dt);
 
 static void Alarm32khzTo62500hzTransformC__AlarmFrom__default__stop(
 # 39 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad0c38);
+uint8_t arg_0x2b747cf9bc38);
 # 103 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void /*Alarm32khz32VirtualizedP.Alarm32khz32C.Alarm16.NAlarm*/Atm128AlarmC__1__Alarm__startAt(/*Alarm32khz32VirtualizedP.Alarm32khz32C.Alarm16.NAlarm*/Atm128AlarmC__1__Alarm__size_type t0, /*Alarm32khz32VirtualizedP.Alarm32khz32C.Alarm16.NAlarm*/Atm128AlarmC__1__Alarm__size_type dt);
 #line 73
@@ -4035,25 +4034,25 @@ static void /*Alarm32khz32VirtualizedP.Alarm32khz32C.Transform32*/TransformAlarm
 # 109 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__size_type /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__getNow(
 # 49 "/usr/src/tinyos/tos/lib/timer/VirtualizeAlarmC.nc"
-uint8_t arg_0x2b2412b621a0);
+uint8_t arg_0x2b747d02d1a0);
 # 78 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__default__fired(
 # 49 "/usr/src/tinyos/tos/lib/timer/VirtualizeAlarmC.nc"
-uint8_t arg_0x2b2412b621a0);
+uint8_t arg_0x2b747d02d1a0);
 # 103 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__startAt(
 # 49 "/usr/src/tinyos/tos/lib/timer/VirtualizeAlarmC.nc"
-uint8_t arg_0x2b2412b621a0, 
+uint8_t arg_0x2b747d02d1a0, 
 # 103 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__size_type t0, /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__size_type dt);
 #line 116
 static /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__size_type /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__getAlarm(
 # 49 "/usr/src/tinyos/tos/lib/timer/VirtualizeAlarmC.nc"
-uint8_t arg_0x2b2412b621a0);
+uint8_t arg_0x2b747d02d1a0);
 # 66 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__start(
 # 49 "/usr/src/tinyos/tos/lib/timer/VirtualizeAlarmC.nc"
-uint8_t arg_0x2b2412b621a0, 
+uint8_t arg_0x2b747d02d1a0, 
 # 66 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__size_type dt);
 
@@ -4064,7 +4063,7 @@ uint8_t arg_0x2b2412b621a0,
 
 static void /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__stop(
 # 49 "/usr/src/tinyos/tos/lib/timer/VirtualizeAlarmC.nc"
-uint8_t arg_0x2b2412b621a0);
+uint8_t arg_0x2b747d02d1a0);
 # 62 "/usr/src/tinyos/tos/interfaces/Init.nc"
 static error_t /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Init__init(void );
 # 78 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
@@ -4139,25 +4138,25 @@ static void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom_
 #line 136
 static uint32_t /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__getNow(
 # 48 "/usr/src/tinyos/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x2b2412c24da0);
+uint8_t arg_0x2b747d0efda0);
 # 83 "/usr/src/tinyos/tos/lib/timer/Timer.nc"
 static void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(
 # 48 "/usr/src/tinyos/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x2b2412c24da0);
+uint8_t arg_0x2b747d0efda0);
 # 92 "/usr/src/tinyos/tos/lib/timer/Timer.nc"
 static bool /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__isRunning(
 # 48 "/usr/src/tinyos/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x2b2412c24da0);
+uint8_t arg_0x2b747d0efda0);
 # 129 "/usr/src/tinyos/tos/lib/timer/Timer.nc"
 static void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShotAt(
 # 48 "/usr/src/tinyos/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x2b2412c24da0, 
+uint8_t arg_0x2b747d0efda0, 
 # 129 "/usr/src/tinyos/tos/lib/timer/Timer.nc"
 uint32_t t0, uint32_t dt);
 #line 73
 static void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShot(
 # 48 "/usr/src/tinyos/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x2b2412c24da0, 
+uint8_t arg_0x2b747d0efda0, 
 # 73 "/usr/src/tinyos/tos/lib/timer/Timer.nc"
 uint32_t dt);
 
@@ -4166,7 +4165,7 @@ uint32_t dt);
 
 static void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__stop(
 # 48 "/usr/src/tinyos/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x2b2412c24da0);
+uint8_t arg_0x2b747d0efda0);
 # 52 "/usr/src/tinyos/tos/interfaces/Random.nc"
 static uint16_t RandomMlcgC__Random__rand16(void );
 #line 46
@@ -4251,7 +4250,7 @@ error_t error);
 # 110 "/usr/src/tinyos/tos/interfaces/AMSend.nc"
 static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(
 # 48 "/usr/src/tinyos/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x2b2412d4d650, 
+am_id_t arg_0x2b747d218650, 
 # 103 "/usr/src/tinyos/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -4264,7 +4263,7 @@ error_t error);
 # 75 "/usr/src/tinyos/tos/interfaces/Send.nc"
 static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__send(
 # 46 "/usr/src/tinyos/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x2b2412d4e430, 
+uint8_t arg_0x2b747d219430, 
 # 67 "/usr/src/tinyos/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4278,7 +4277,7 @@ uint8_t len);
 #line 100
 static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(
 # 46 "/usr/src/tinyos/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x2b2412d4e430, 
+uint8_t arg_0x2b747d219430, 
 # 96 "/usr/src/tinyos/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4317,7 +4316,7 @@ uint8_t len);
 # 80 "/usr/src/tinyos/tos/interfaces/AMSend.nc"
 static error_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(
 # 47 "/usr/src/tinyos/tos/lib/serial/SerialActiveMessageP.nc"
-am_id_t arg_0x2b2412dd0508, 
+am_id_t arg_0x2b747d29b508, 
 # 80 "/usr/src/tinyos/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -4368,7 +4367,7 @@ message_t *
 
 /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__default__receive(
 # 48 "/usr/src/tinyos/tos/lib/serial/SerialActiveMessageP.nc"
-am_id_t arg_0x2b2412dcf780, 
+am_id_t arg_0x2b747d29a780, 
 # 71 "/usr/src/tinyos/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -4437,7 +4436,7 @@ static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__receive
 # 75 "/usr/src/tinyos/tos/interfaces/Send.nc"
 static error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__send(
 # 51 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412ed7748, 
+uart_id_t arg_0x2b747d3a2748, 
 # 67 "/usr/src/tinyos/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4451,7 +4450,7 @@ uint8_t len);
 #line 100
 static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__default__sendDone(
 # 51 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412ed7748, 
+uart_id_t arg_0x2b747d3a2748, 
 # 96 "/usr/src/tinyos/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4469,7 +4468,7 @@ message_t *
 
 /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__default__receive(
 # 50 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412edac38, 
+uart_id_t arg_0x2b747d3a5c38, 
 # 71 "/usr/src/tinyos/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -4482,17 +4481,17 @@ uint8_t len);
 # 31 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__upperLength(
 # 54 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412ed6aa8, 
+uart_id_t arg_0x2b747d3a1aa8, 
 # 31 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
 message_t *msg, uint8_t dataLinkLen);
 #line 15
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__offset(
 # 54 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412ed6aa8);
+uart_id_t arg_0x2b747d3a1aa8);
 # 23 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__dataLinkLength(
 # 54 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412ed6aa8, 
+uart_id_t arg_0x2b747d3a1aa8, 
 # 23 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
 message_t *msg, uint8_t upperLen);
 # 81 "/usr/src/tinyos/tos/lib/serial/SendBytePacket.nc"
@@ -4755,7 +4754,7 @@ static __inline void /*HplAtm128GeneralIOC.PortA.Bit1*/HplAtm128GeneralIOPinP__1
 static __inline void /*HplAtm128GeneralIOC.PortA.Bit1*/HplAtm128GeneralIOPinP__1__IO__makeOutput(void );
 #line 55
 static __inline void /*HplAtm128GeneralIOC.PortA.Bit2*/HplAtm128GeneralIOPinP__2__IO__set(void );
-
+static __inline void /*HplAtm128GeneralIOC.PortA.Bit2*/HplAtm128GeneralIOPinP__2__IO__clr(void );
 
 
 
@@ -4843,7 +4842,7 @@ int main(void )   ;
 # 75 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
 static void SchedulerBasicP__TaskBasic__runTask(
 # 56 "/usr/src/tinyos/tos/system/SchedulerBasicP.nc"
-uint8_t arg_0x2b2411567ab0);
+uint8_t arg_0x2b747ba32ab0);
 # 76 "/usr/src/tinyos/tos/interfaces/McuSleep.nc"
 static void SchedulerBasicP__McuSleep__sleep(void );
 # 61 "/usr/src/tinyos/tos/system/SchedulerBasicP.nc"
@@ -4913,7 +4912,7 @@ static inline void McuSleepC__McuPowerState__update(void );
 static void LedsP__Led0__makeOutput(void );
 #line 40
 static void LedsP__Led0__set(void );
-
+static void LedsP__Led0__clr(void );
 
 
 
@@ -4931,6 +4930,8 @@ static void LedsP__Led2__makeOutput(void );
 static void LedsP__Led2__set(void );
 # 56 "/usr/src/tinyos/tos/system/LedsP.nc"
 static inline error_t LedsP__Init__init(void );
+#line 74
+static inline void LedsP__Leds__led0On(void );
 #line 89
 static inline void LedsP__Leds__led1On(void );
 
@@ -5025,7 +5026,7 @@ static error_t PibP__radioControlStopTask__postTask(void );
 # 74 "/usr/src/tinyos/tos/interfaces/Notify.nc"
 static void PibP__PIBUpdate__notify(
 # 59 "/usr/src/tinyos/tos/lib/mac/tkn154/PibP.nc"
-uint8_t arg_0x2b24119e5d98, 
+uint8_t arg_0x2b747beb0d98, 
 # 74 "/usr/src/tinyos/tos/interfaces/Notify.nc"
 PibP__PIBUpdate__val_t val);
 # 78 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_RESET.nc"
@@ -5188,8 +5189,6 @@ static inline ieee154_macPanCoordinator_t PibP__MLME_GET__macPanCoordinator(void
 
 
 static ieee154_status_t PibP__MLME_SET__phyCurrentChannel(ieee154_phyCurrentChannel_t value);
-#line 350
-static inline ieee154_status_t PibP__MLME_SET__phyTransmitPower(ieee154_phyTransmitPower_t value);
 #line 372
 static inline ieee154_status_t PibP__MLME_SET__macAssociationPermit(ieee154_macAssociationPermit_t value);
 #line 398
@@ -5222,7 +5221,17 @@ static ieee154_status_t PibP__MLME_SET__macCoordShortAddress(ieee154_macCoordSho
 static ieee154_status_t PibP__MLME_SET__macDSN(ieee154_macDSN_t value);
 #line 454
 static ieee154_status_t PibP__MLME_SET__macPANId(ieee154_macPANId_t value);
-#line 466
+
+
+
+
+
+static inline ieee154_status_t PibP__MLME_SET__macRxOnWhenIdle(ieee154_macRxOnWhenIdle_t value);
+
+
+
+
+
 static ieee154_status_t PibP__MLME_SET__macShortAddress(ieee154_macShortAddress_t value);
 #line 478
 static inline ieee154_status_t PibP__MLME_SET__macAssociatedPANCoord(ieee154_macAssociatedPANCoord_t value);
@@ -5333,17 +5342,17 @@ static void PibP__PIBUpdate__default__notify(uint8_t PIBAttributeID, const void 
 # 83 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioTx.nc"
 static void RadioControlImplP__MacTx__transmitDone(
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bcf060, 
+uint8_t arg_0x2b747c09a060, 
 # 83 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioTx.nc"
 ieee154_txframe_t *frame, error_t result);
 # 65 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
 static void RadioControlImplP__MacRx__enableRxDone(
 # 42 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bd0020);
+uint8_t arg_0x2b747c09b020);
 # 84 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
 static message_t *RadioControlImplP__MacRx__received(
 # 42 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bd0020, 
+uint8_t arg_0x2b747c09b020, 
 # 84 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
 message_t *frame);
 # 66 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioTx.nc"
@@ -5353,7 +5362,7 @@ static error_t RadioControlImplP__PhyUnslottedCsmaCa__transmit(ieee154_txframe_t
 #line 89
 static void RadioControlImplP__UnslottedCsmaCa__transmitDone(
 # 45 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bcec20, 
+uint8_t arg_0x2b747c099c20, 
 # 89 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/UnslottedCsmaCa.nc"
 ieee154_txframe_t *frame, ieee154_csma_t *csma, bool ackPendingFlag, error_t result);
 # 47 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioOff.nc"
@@ -5363,7 +5372,7 @@ static bool RadioControlImplP__PhyRadioOff__isOff(void );
 #line 53
 static void RadioControlImplP__MacRadioOff__offDone(
 # 46 "/usr/src/tinyos/tos/lib/mac/tkn154/RadioControlImplP.nc"
-uint8_t arg_0x2b2411bcc9b8);
+uint8_t arg_0x2b747c0979b8);
 # 55 "/usr/src/tinyos/tos/interfaces/Get.nc"
 static RadioControlImplP__RadioPromiscuousMode__val_t RadioControlImplP__RadioPromiscuousMode__get(void );
 # 98 "/usr/src/tinyos/tos/interfaces/ArbiterInfo.nc"
@@ -5513,15 +5522,15 @@ static inline error_t /*RadioControlP.Queue*/RoundRobinResourceQueueC__0__RoundR
 # 53 "/usr/src/tinyos/tos/interfaces/ResourceRequested.nc"
 static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceRequested__requested(
 # 53 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c27020);
+uint8_t arg_0x2b747c0f2020);
 # 65 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
 static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__unconfigure(
 # 57 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c26538);
+uint8_t arg_0x2b747c0f1538);
 # 59 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
 static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__configure(
 # 57 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c26538);
+uint8_t arg_0x2b747c0f1538);
 # 79 "/usr/src/tinyos/tos/interfaces/ResourceQueue.nc"
 static error_t /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Queue__enqueue(resource_client_id_t id);
 #line 53
@@ -5531,7 +5540,7 @@ static resource_client_id_t /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__
 # 98 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/TransferableResource.nc"
 static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource__granted(
 # 52 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
-uint8_t arg_0x2b2411c2aad8);
+uint8_t arg_0x2b747c0f5ad8);
 # 67 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
 static error_t /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__grantedTask__postTask(void );
 # 70 "/usr/src/tinyos/tos/lib/mac/tkn154/SimpleTransferArbiterP.nc"
@@ -5603,7 +5612,7 @@ static void DispatchUnslottedCsmaP__FrameTx__transmitDone(ieee154_txframe_t *txF
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameExtracted.nc"
 static message_t *DispatchUnslottedCsmaP__FrameExtracted__received(
 # 57 "/usr/src/tinyos/tos/lib/mac/tkn154/DispatchUnslottedCsmaP.nc"
-uint8_t arg_0x2b2411c85bf8, 
+uint8_t arg_0x2b747c150bf8, 
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameExtracted.nc"
 message_t *rxFrame, ieee154_txframe_t *txFrame);
 # 56 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
@@ -5643,7 +5652,7 @@ ieee154_status_t status);
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameRx.nc"
 static message_t *DispatchUnslottedCsmaP__FrameRx__received(
 # 56 "/usr/src/tinyos/tos/lib/mac/tkn154/DispatchUnslottedCsmaP.nc"
-uint8_t arg_0x2b2411c60ba0, 
+uint8_t arg_0x2b747c12bba0, 
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameRx.nc"
 message_t *frame);
 # 55 "/usr/src/tinyos/tos/interfaces/Set.nc"
@@ -5888,7 +5897,7 @@ static inline void DispatchUnslottedCsmaP__RadioTokenRequested__requested(void )
 # 51 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 static void /*TKN154NonBeaconEnabledP.DispatchQueueP*/DispatchQueueP__0__FrameTx__transmitDone(
 # 40 "/usr/src/tinyos/tos/lib/mac/tkn154/DispatchQueueP.nc"
-uint8_t arg_0x2b2411d2f350, 
+uint8_t arg_0x2b747c1fa350, 
 # 51 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 ieee154_txframe_t *txFrame, ieee154_status_t status);
 # 37 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/Purge.nc"
@@ -5979,7 +5988,7 @@ static void IndirectTxP__IndirectTxTimeout__stop(void );
 # 51 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 static void IndirectTxP__FrameTx__transmitDone(
 # 42 "/usr/src/tinyos/tos/lib/mac/tkn154/IndirectTxP.nc"
-uint8_t arg_0x2b2411d70390, 
+uint8_t arg_0x2b747c23b390, 
 # 51 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
 ieee154_txframe_t *txFrame, ieee154_status_t status);
 # 47 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/TimeCalc.nc"
@@ -6101,7 +6110,7 @@ static ieee154_macShortAddress_t PollP__MLME_GET__macShortAddress(void );
 # 52 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/DataRequest.nc"
 static void PollP__DataRequest__pollDone(
 # 46 "/usr/src/tinyos/tos/lib/mac/tkn154/PollP.nc"
-uint8_t arg_0x2b2411df0280);
+uint8_t arg_0x2b747c2bb280);
 # 73 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_POLL.nc"
 static void PollP__MLME_POLL__confirm(
 ieee154_status_t status);
@@ -7878,13 +7887,13 @@ uint16_t len);
 # 91 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 static void CC2420SpiP__Fifo__writeDone(
 # 46 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412641ca8, 
+uint8_t arg_0x2b747cb0cca8, 
 # 91 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length, error_t error);
 #line 71
 static void CC2420SpiP__Fifo__readDone(
 # 46 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412641ca8, 
+uint8_t arg_0x2b747cb0cca8, 
 # 71 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length, error_t error);
 # 24 "/usr/src/tinyos/tos/chips/cc2420/interfaces/ChipSpiResource.nc"
@@ -7911,7 +7920,7 @@ static bool CC2420SpiP__SpiResource__isOwner(void );
 #line 102
 static void CC2420SpiP__Resource__granted(
 # 45 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x2b2412642a68);
+uint8_t arg_0x2b747cb0da68);
 # 67 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
 static error_t CC2420SpiP__grant__postTask(void );
 # 88 "/usr/src/tinyos/tos/chips/cc2420/spi/CC2420SpiP.nc"
@@ -8086,19 +8095,19 @@ error_t error);
 # 120 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t Atm128SpiP__ResourceArbiter__release(
 # 99 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b241271d060);
+uint8_t arg_0x2b747cbe8060);
 # 97 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t Atm128SpiP__ResourceArbiter__immediateRequest(
 # 99 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b241271d060);
+uint8_t arg_0x2b747cbe8060);
 # 88 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static error_t Atm128SpiP__ResourceArbiter__request(
 # 99 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b241271d060);
+uint8_t arg_0x2b747cbe8060);
 # 128 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static bool Atm128SpiP__ResourceArbiter__isOwner(
 # 99 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b241271d060);
+uint8_t arg_0x2b747cbe8060);
 # 89 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128Spi.nc"
 static void Atm128SpiP__Spi__sleep(void );
 #line 83
@@ -8127,7 +8136,7 @@ static void Atm128SpiP__Spi__setClockPhase(bool sampleOnTrailing);
 # 102 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static void Atm128SpiP__Resource__granted(
 # 95 "/usr/src/tinyos/tos/chips/atm128/spi/Atm128SpiP.nc"
-uint8_t arg_0x2b24126e6ae0);
+uint8_t arg_0x2b747cbb1ae0);
 # 90 "/usr/src/tinyos/tos/interfaces/ArbiterInfo.nc"
 static bool Atm128SpiP__ArbiterInfo__inUse(void );
 # 52 "/usr/src/tinyos/tos/interfaces/McuPowerState.nc"
@@ -8290,19 +8299,19 @@ static inline error_t /*Atm128SpiC.Arbiter.Queue*/FcfsResourceQueueC__0__FcfsQue
 # 53 "/usr/src/tinyos/tos/interfaces/ResourceRequested.nc"
 static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__requested(
 # 52 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412804408);
+uint8_t arg_0x2b747cccf408);
 # 61 "/usr/src/tinyos/tos/interfaces/ResourceRequested.nc"
 static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__immediateRequested(
 # 52 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412804408);
+uint8_t arg_0x2b747cccf408);
 # 65 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
 static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__unconfigure(
 # 56 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412803920);
+uint8_t arg_0x2b747ccce920);
 # 59 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
 static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__configure(
 # 56 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412803920);
+uint8_t arg_0x2b747ccce920);
 # 79 "/usr/src/tinyos/tos/interfaces/ResourceQueue.nc"
 static error_t /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Queue__enqueue(resource_client_id_t id);
 #line 53
@@ -8312,7 +8321,7 @@ static resource_client_id_t /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Que
 # 102 "/usr/src/tinyos/tos/interfaces/Resource.nc"
 static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__granted(
 # 51 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
-uint8_t arg_0x2b2412805258);
+uint8_t arg_0x2b747ccd0258);
 # 67 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
 static error_t /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__grantedTask__postTask(void );
 # 69 "/usr/src/tinyos/tos/system/SimpleArbiterP.nc"
@@ -8941,19 +8950,19 @@ static inline void /*Ieee802154NonBeaconEnabledC.PHYAlarm1.Alarm62500hz32P*/Alar
 # 78 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void Alarm32khzTo62500hzTransformC__Alarm__fired(
 # 38 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad4448);
+uint8_t arg_0x2b747cf9f448);
 # 109 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static Alarm32khzTo62500hzTransformC__AlarmFrom__size_type Alarm32khzTo62500hzTransformC__AlarmFrom__getNow(
 # 39 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad0c38);
+uint8_t arg_0x2b747cf9bc38);
 # 116 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static Alarm32khzTo62500hzTransformC__AlarmFrom__size_type Alarm32khzTo62500hzTransformC__AlarmFrom__getAlarm(
 # 39 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad0c38);
+uint8_t arg_0x2b747cf9bc38);
 # 66 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void Alarm32khzTo62500hzTransformC__AlarmFrom__start(
 # 39 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad0c38, 
+uint8_t arg_0x2b747cf9bc38, 
 # 66 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 Alarm32khzTo62500hzTransformC__AlarmFrom__size_type dt);
 
@@ -8964,7 +8973,7 @@ Alarm32khzTo62500hzTransformC__AlarmFrom__size_type dt);
 
 static void Alarm32khzTo62500hzTransformC__AlarmFrom__stop(
 # 39 "/usr/src/tinyos/tos/platforms/telosb/mac/tkn154/timer/Alarm32khzTo62500hzTransformC.nc"
-uint8_t arg_0x2b2412ad0c38);
+uint8_t arg_0x2b747cf9bc38);
 #line 55
 static inline void Alarm32khzTo62500hzTransformC__Alarm__start(uint8_t num, uint32_t dt);
 static inline void Alarm32khzTo62500hzTransformC__Alarm__stop(uint8_t num);
@@ -9064,7 +9073,7 @@ static inline void /*Alarm32khz32VirtualizedP.Alarm32khz32C.Transform32*/Transfo
 # 78 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static void /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__fired(
 # 49 "/usr/src/tinyos/tos/lib/timer/VirtualizeAlarmC.nc"
-uint8_t arg_0x2b2412b621a0);
+uint8_t arg_0x2b747d02d1a0);
 # 109 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
 static /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__AlarmFrom__size_type /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__AlarmFrom__getNow(void );
 #line 103
@@ -9363,7 +9372,7 @@ static void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom_
 
 static void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(
 # 48 "/usr/src/tinyos/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x2b2412c24da0);
+uint8_t arg_0x2b747d0efda0);
 #line 71
 enum /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_unnamed4418 {
 #line 71
@@ -9467,12 +9476,14 @@ static void ConectaEtrocaMsgP__Leds__led1On(void );
 static void ConectaEtrocaMsgP__Leds__led2Toggle(void );
 #line 77
 static void ConectaEtrocaMsgP__Leds__led1Off(void );
-# 75 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_SET.nc"
+#line 56
+static void ConectaEtrocaMsgP__Leds__led0On(void );
+# 146 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_SET.nc"
+static ieee154_status_t ConectaEtrocaMsgP__MLME_SET__macRxOnWhenIdle(ieee154_macRxOnWhenIdle_t value);
+#line 75
 static ieee154_status_t ConectaEtrocaMsgP__MLME_SET__macAssociationPermit(ieee154_macAssociationPermit_t value);
 #line 151
 static ieee154_status_t ConectaEtrocaMsgP__MLME_SET__macShortAddress(ieee154_macShortAddress_t value);
-#line 60
-static ieee154_status_t ConectaEtrocaMsgP__MLME_SET__phyTransmitPower(ieee154_phyTransmitPower_t value);
 # 69 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_RESET.nc"
 static ieee154_status_t ConectaEtrocaMsgP__MLME_RESET__request(
 bool SetDefaultPIB);
@@ -9484,7 +9495,7 @@ static inline void ConectaEtrocaMsgP__Boot__booted(void );
 
 
 static inline void ConectaEtrocaMsgP__MLME_RESET__confirm(ieee154_status_t status);
-#line 62
+#line 61
 static inline void ConectaEtrocaMsgP__MLME_START__confirm(ieee154_status_t status);
 
 
@@ -9495,6 +9506,7 @@ static inline void ConectaEtrocaMsgP__MLME_ASSOCIATE__indication(
 uint64_t DeviceAddress, 
 ieee154_CapabilityInformation_t CapabilityInformation, 
 ieee154_security_t *security);
+
 
 
 
@@ -9535,7 +9547,7 @@ ieee154_security_t *security);
 
 
 
-bool ConectaEtrocaMsgP__m_ledCount;
+bool ConectaEtrocaMsgP__m_ledCount = 0;
 static message_t *ConectaEtrocaMsgP__MCPS_DATA__indication(message_t *frame);
 
 
@@ -9603,7 +9615,7 @@ static inline void /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__Se
 # 80 "/usr/src/tinyos/tos/interfaces/AMSend.nc"
 static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(
 # 48 "/usr/src/tinyos/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x2b2412d4d650, 
+am_id_t arg_0x2b747d218650, 
 # 80 "/usr/src/tinyos/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -9620,7 +9632,7 @@ uint8_t len);
 # 100 "/usr/src/tinyos/tos/interfaces/Send.nc"
 static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(
 # 46 "/usr/src/tinyos/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x2b2412d4e430, 
+uint8_t arg_0x2b747d219430, 
 # 96 "/usr/src/tinyos/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -9713,7 +9725,7 @@ uint8_t len);
 # 110 "/usr/src/tinyos/tos/interfaces/AMSend.nc"
 static void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__sendDone(
 # 47 "/usr/src/tinyos/tos/lib/serial/SerialActiveMessageP.nc"
-am_id_t arg_0x2b2412dd0508, 
+am_id_t arg_0x2b747d29b508, 
 # 103 "/usr/src/tinyos/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -9732,7 +9744,7 @@ message_t *
 
 /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__receive(
 # 48 "/usr/src/tinyos/tos/lib/serial/SerialActiveMessageP.nc"
-am_id_t arg_0x2b2412dcf780, 
+am_id_t arg_0x2b747d29a780, 
 # 71 "/usr/src/tinyos/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -10217,7 +10229,7 @@ static error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__rece
 # 100 "/usr/src/tinyos/tos/interfaces/Send.nc"
 static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__sendDone(
 # 51 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412ed7748, 
+uart_id_t arg_0x2b747d3a2748, 
 # 96 "/usr/src/tinyos/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -10235,7 +10247,7 @@ message_t *
 
 /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__receive(
 # 50 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412edac38, 
+uart_id_t arg_0x2b747d3a5c38, 
 # 71 "/usr/src/tinyos/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -10248,17 +10260,17 @@ uint8_t len);
 # 31 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__upperLength(
 # 54 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412ed6aa8, 
+uart_id_t arg_0x2b747d3a1aa8, 
 # 31 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
 message_t *msg, uint8_t dataLinkLen);
 #line 15
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__offset(
 # 54 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412ed6aa8);
+uart_id_t arg_0x2b747d3a1aa8);
 # 23 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__dataLinkLength(
 # 54 "/usr/src/tinyos/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x2b2412ed6aa8, 
+uart_id_t arg_0x2b747d3a1aa8, 
 # 23 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
 message_t *msg, uint8_t upperLen);
 # 71 "/usr/src/tinyos/tos/lib/serial/SendBytePacket.nc"
@@ -11555,13 +11567,13 @@ inline static void /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AM
 }
 #line 162
 # 80 "/usr/src/tinyos/tos/interfaces/AMSend.nc"
-inline static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x2b2412d4d650, am_addr_t addr, message_t * msg, uint8_t len){
+inline static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x2b747d218650, am_addr_t addr, message_t * msg, uint8_t len){
 #line 80
   unsigned char __nesc_result;
 #line 80
 
 #line 80
-  __nesc_result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(arg_0x2b2412d4d650, addr, msg, len);
+  __nesc_result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(arg_0x2b747d218650, addr, msg, len);
 #line 80
 
 #line 80
@@ -11760,13 +11772,13 @@ uint8_t upperLen)
 }
 
 # 23 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
-inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__dataLinkLength(uart_id_t arg_0x2b2412ed6aa8, message_t *msg, uint8_t upperLen){
+inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__dataLinkLength(uart_id_t arg_0x2b747d3a1aa8, message_t *msg, uint8_t upperLen){
 #line 23
   unsigned char __nesc_result;
 #line 23
 
 #line 23
-  switch (arg_0x2b2412ed6aa8) {
+  switch (arg_0x2b747d3a1aa8) {
 #line 23
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 23
@@ -11776,7 +11788,7 @@ inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__
 #line 23
     default:
 #line 23
-      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__dataLinkLength(arg_0x2b2412ed6aa8, msg, upperLen);
+      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__dataLinkLength(arg_0x2b747d3a1aa8, msg, upperLen);
 #line 23
       break;
 #line 23
@@ -11803,13 +11815,13 @@ static inline uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__
 }
 
 # 15 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
-inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__offset(uart_id_t arg_0x2b2412ed6aa8){
+inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__offset(uart_id_t arg_0x2b747d3a1aa8){
 #line 15
   unsigned char __nesc_result;
 #line 15
 
 #line 15
-  switch (arg_0x2b2412ed6aa8) {
+  switch (arg_0x2b747d3a1aa8) {
 #line 15
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 15
@@ -11819,7 +11831,7 @@ inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__
 #line 15
     default:
 #line 15
-      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__offset(arg_0x2b2412ed6aa8);
+      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__offset(arg_0x2b747d3a1aa8);
 #line 15
       break;
 #line 15
@@ -11961,9 +11973,9 @@ static inline void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default
 }
 
 # 100 "/usr/src/tinyos/tos/interfaces/Send.nc"
-inline static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(uint8_t arg_0x2b2412d4e430, message_t * msg, error_t error){
+inline static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(uint8_t arg_0x2b747d219430, message_t * msg, error_t error){
 #line 100
-  switch (arg_0x2b2412d4e430) {
+  switch (arg_0x2b747d219430) {
 #line 100
     case 0U:
 #line 100
@@ -11973,7 +11985,7 @@ inline static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDon
 #line 100
     default:
 #line 100
-      /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(arg_0x2b2412d4e430, msg, error);
+      /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(arg_0x2b747d219430, msg, error);
 #line 100
       break;
 #line 100
@@ -12011,9 +12023,9 @@ static inline void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendD
 }
 
 # 110 "/usr/src/tinyos/tos/interfaces/AMSend.nc"
-inline static void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__sendDone(am_id_t arg_0x2b2412dd0508, message_t * msg, error_t error){
+inline static void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__sendDone(am_id_t arg_0x2b747d29b508, message_t * msg, error_t error){
 #line 110
-  /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(arg_0x2b2412dd0508, msg, error);
+  /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(arg_0x2b747d29b508, msg, error);
 #line 110
 }
 #line 110
@@ -12032,9 +12044,9 @@ static inline void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__
 }
 
 # 100 "/usr/src/tinyos/tos/interfaces/Send.nc"
-inline static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__sendDone(uart_id_t arg_0x2b2412ed7748, message_t * msg, error_t error){
+inline static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__sendDone(uart_id_t arg_0x2b747d3a2748, message_t * msg, error_t error){
 #line 100
-  switch (arg_0x2b2412ed7748) {
+  switch (arg_0x2b747d3a2748) {
 #line 100
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 100
@@ -12044,7 +12056,7 @@ inline static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__
 #line 100
     default:
 #line 100
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__default__sendDone(arg_0x2b2412ed7748, msg, error);
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__default__sendDone(arg_0x2b747d3a2748, msg, error);
 #line 100
       break;
 #line 100
@@ -12245,13 +12257,13 @@ static inline message_t */*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Rec
 }
 
 # 78 "/usr/src/tinyos/tos/interfaces/Receive.nc"
-inline static message_t * /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__receive(am_id_t arg_0x2b2412dcf780, message_t * msg, void * payload, uint8_t len){
+inline static message_t * /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__receive(am_id_t arg_0x2b747d29a780, message_t * msg, void * payload, uint8_t len){
 #line 78
   nx_struct message_t *__nesc_result;
 #line 78
 
 #line 78
-    __nesc_result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__default__receive(arg_0x2b2412dcf780, msg, payload, len);
+    __nesc_result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__default__receive(arg_0x2b747d29a780, msg, payload, len);
 #line 78
 
 #line 78
@@ -12276,13 +12288,13 @@ uint8_t len)
 }
 
 # 78 "/usr/src/tinyos/tos/interfaces/Receive.nc"
-inline static message_t * /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__receive(uart_id_t arg_0x2b2412edac38, message_t * msg, void * payload, uint8_t len){
+inline static message_t * /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__receive(uart_id_t arg_0x2b747d3a5c38, message_t * msg, void * payload, uint8_t len){
 #line 78
   nx_struct message_t *__nesc_result;
 #line 78
 
 #line 78
-  switch (arg_0x2b2412edac38) {
+  switch (arg_0x2b747d3a5c38) {
 #line 78
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 78
@@ -12292,7 +12304,7 @@ inline static message_t * /*SerialDispatcherC.SerialDispatcherP*/SerialDispatche
 #line 78
     default:
 #line 78
-      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__default__receive(arg_0x2b2412edac38, msg, payload, len);
+      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__default__receive(arg_0x2b747d3a5c38, msg, payload, len);
 #line 78
       break;
 #line 78
@@ -12320,13 +12332,13 @@ uint8_t dataLinkLen)
 }
 
 # 31 "/usr/src/tinyos/tos/lib/serial/SerialPacketInfo.nc"
-inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__upperLength(uart_id_t arg_0x2b2412ed6aa8, message_t *msg, uint8_t dataLinkLen){
+inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__upperLength(uart_id_t arg_0x2b747d3a1aa8, message_t *msg, uint8_t dataLinkLen){
 #line 31
   unsigned char __nesc_result;
 #line 31
 
 #line 31
-  switch (arg_0x2b2412ed6aa8) {
+  switch (arg_0x2b747d3a1aa8) {
 #line 31
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 31
@@ -12336,7 +12348,7 @@ inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__
 #line 31
     default:
 #line 31
-      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__upperLength(arg_0x2b2412ed6aa8, msg, dataLinkLen);
+      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__upperLength(arg_0x2b747d3a1aa8, msg, dataLinkLen);
 #line 31
       break;
 #line 31
@@ -13103,9 +13115,9 @@ static inline void Alarm32khzTo62500hzTransformC__AlarmFrom__default__stop(uint8
 }
 
 # 73 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
-inline static void Alarm32khzTo62500hzTransformC__AlarmFrom__stop(uint8_t arg_0x2b2412ad0c38){
+inline static void Alarm32khzTo62500hzTransformC__AlarmFrom__stop(uint8_t arg_0x2b747cf9bc38){
 #line 73
-  switch (arg_0x2b2412ad0c38) {
+  switch (arg_0x2b747cf9bc38) {
 #line 73
     case /*Ieee802154NonBeaconEnabledC.PHYAlarm2*/Alarm62500hz32VirtualizedC__0__CLIENT_ID:
 #line 73
@@ -13127,7 +13139,7 @@ inline static void Alarm32khzTo62500hzTransformC__AlarmFrom__stop(uint8_t arg_0x
 #line 73
     default:
 #line 73
-      Alarm32khzTo62500hzTransformC__AlarmFrom__default__stop(arg_0x2b2412ad0c38);
+      Alarm32khzTo62500hzTransformC__AlarmFrom__default__stop(arg_0x2b747cf9bc38);
 #line 73
       break;
 #line 73
@@ -13216,13 +13228,13 @@ static inline uint32_t Alarm32khzTo62500hzTransformC__AlarmFrom__default__getNow
 }
 
 # 109 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
-inline static Alarm32khzTo62500hzTransformC__AlarmFrom__size_type Alarm32khzTo62500hzTransformC__AlarmFrom__getNow(uint8_t arg_0x2b2412ad0c38){
+inline static Alarm32khzTo62500hzTransformC__AlarmFrom__size_type Alarm32khzTo62500hzTransformC__AlarmFrom__getNow(uint8_t arg_0x2b747cf9bc38){
 #line 109
   unsigned long __nesc_result;
 #line 109
 
 #line 109
-  switch (arg_0x2b2412ad0c38) {
+  switch (arg_0x2b747cf9bc38) {
 #line 109
     case /*Ieee802154NonBeaconEnabledC.PHYAlarm2*/Alarm62500hz32VirtualizedC__0__CLIENT_ID:
 #line 109
@@ -13244,7 +13256,7 @@ inline static Alarm32khzTo62500hzTransformC__AlarmFrom__size_type Alarm32khzTo62
 #line 109
     default:
 #line 109
-      __nesc_result = Alarm32khzTo62500hzTransformC__AlarmFrom__default__getNow(arg_0x2b2412ad0c38);
+      __nesc_result = Alarm32khzTo62500hzTransformC__AlarmFrom__default__getNow(arg_0x2b747cf9bc38);
 #line 109
       break;
 #line 109
@@ -13534,9 +13546,9 @@ static inline void PollP__DataRequest__default__pollDone(uint8_t client)
 }
 
 # 52 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/DataRequest.nc"
-inline static void PollP__DataRequest__pollDone(uint8_t arg_0x2b2411df0280){
+inline static void PollP__DataRequest__pollDone(uint8_t arg_0x2b747c2bb280){
 #line 52
-  switch (arg_0x2b2411df0280) {
+  switch (arg_0x2b747c2bb280) {
 #line 52
     case 0U:
 #line 52
@@ -13546,7 +13558,7 @@ inline static void PollP__DataRequest__pollDone(uint8_t arg_0x2b2411df0280){
 #line 52
     default:
 #line 52
-      PollP__DataRequest__default__pollDone(arg_0x2b2411df0280);
+      PollP__DataRequest__default__pollDone(arg_0x2b747c2bb280);
 #line 52
       break;
 #line 52
@@ -13941,9 +13953,9 @@ static inline void IndirectTxP__FrameTx__default__transmitDone(uint8_t client, i
 }
 
 # 51 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
-inline static void IndirectTxP__FrameTx__transmitDone(uint8_t arg_0x2b2411d70390, ieee154_txframe_t *txFrame, ieee154_status_t status){
+inline static void IndirectTxP__FrameTx__transmitDone(uint8_t arg_0x2b747c23b390, ieee154_txframe_t *txFrame, ieee154_status_t status){
 #line 51
-  switch (arg_0x2b2411d70390) {
+  switch (arg_0x2b747c23b390) {
 #line 51
     case 0U:
 #line 51
@@ -13965,7 +13977,7 @@ inline static void IndirectTxP__FrameTx__transmitDone(uint8_t arg_0x2b2411d70390
 #line 51
     default:
 #line 51
-      IndirectTxP__FrameTx__default__transmitDone(arg_0x2b2411d70390, txFrame, status);
+      IndirectTxP__FrameTx__default__transmitDone(arg_0x2b747c23b390, txFrame, status);
 #line 51
       break;
 #line 51
@@ -14157,9 +14169,9 @@ static inline void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Tim
 }
 
 # 83 "/usr/src/tinyos/tos/lib/timer/Timer.nc"
-inline static void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(uint8_t arg_0x2b2412c24da0){
+inline static void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(uint8_t arg_0x2b747d0efda0){
 #line 83
-  switch (arg_0x2b2412c24da0) {
+  switch (arg_0x2b747d0efda0) {
 #line 83
     case 0U:
 #line 83
@@ -14193,7 +14205,7 @@ inline static void /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Tim
 #line 83
     default:
 #line 83
-      /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(arg_0x2b2412c24da0);
+      /*HilTimer62500hzC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(arg_0x2b747d0efda0);
 #line 83
       break;
 #line 83
@@ -14231,9 +14243,9 @@ static inline void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceR
 }
 
 # 53 "/usr/src/tinyos/tos/interfaces/ResourceRequested.nc"
-inline static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceRequested__requested(uint8_t arg_0x2b2411c27020){
+inline static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceRequested__requested(uint8_t arg_0x2b747c0f2020){
 #line 53
-  switch (arg_0x2b2411c27020) {
+  switch (arg_0x2b747c0f2020) {
 #line 53
     case 12U:
 #line 53
@@ -14243,7 +14255,7 @@ inline static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceR
 #line 53
     default:
 #line 53
-      /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceRequested__default__requested(arg_0x2b2411c27020);
+      /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceRequested__default__requested(arg_0x2b747c0f2020);
 #line 53
       break;
 #line 53
@@ -14634,13 +14646,13 @@ inline static error_t CC2420SpiP__WorkingState__requestState(uint8_t reqState){
 }
 #line 45
 # 128 "/usr/src/tinyos/tos/interfaces/Resource.nc"
-inline static bool Atm128SpiP__ResourceArbiter__isOwner(uint8_t arg_0x2b241271d060){
+inline static bool Atm128SpiP__ResourceArbiter__isOwner(uint8_t arg_0x2b747cbe8060){
 #line 128
   unsigned char __nesc_result;
 #line 128
 
 #line 128
-  __nesc_result = /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__isOwner(arg_0x2b241271d060);
+  __nesc_result = /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__isOwner(arg_0x2b747cbe8060);
 #line 128
 
 #line 128
@@ -14728,9 +14740,9 @@ static inline void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConf
 }
 
 # 59 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
-inline static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__configure(uint8_t arg_0x2b2412803920){
+inline static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__configure(uint8_t arg_0x2b747ccce920){
 #line 59
-    /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__default__configure(arg_0x2b2412803920);
+    /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__default__configure(arg_0x2b747ccce920);
 #line 59
 }
 #line 59
@@ -14741,9 +14753,9 @@ static inline void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequ
 }
 
 # 61 "/usr/src/tinyos/tos/interfaces/ResourceRequested.nc"
-inline static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__immediateRequested(uint8_t arg_0x2b2412804408){
+inline static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__immediateRequested(uint8_t arg_0x2b747cccf408){
 #line 61
-    /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__default__immediateRequested(arg_0x2b2412804408);
+    /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__default__immediateRequested(arg_0x2b747cccf408);
 #line 61
 }
 #line 61
@@ -14781,13 +14793,13 @@ static inline error_t /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource_
 }
 
 # 97 "/usr/src/tinyos/tos/interfaces/Resource.nc"
-inline static error_t Atm128SpiP__ResourceArbiter__immediateRequest(uint8_t arg_0x2b241271d060){
+inline static error_t Atm128SpiP__ResourceArbiter__immediateRequest(uint8_t arg_0x2b747cbe8060){
 #line 97
   unsigned char __nesc_result;
 #line 97
 
 #line 97
-  __nesc_result = /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__immediateRequest(arg_0x2b241271d060);
+  __nesc_result = /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__immediateRequest(arg_0x2b747cbe8060);
 #line 97
 
 #line 97
@@ -15523,9 +15535,9 @@ static inline void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConf
 }
 
 # 65 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
-inline static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__unconfigure(uint8_t arg_0x2b2412803920){
+inline static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__unconfigure(uint8_t arg_0x2b747ccce920){
 #line 65
-    /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__default__unconfigure(arg_0x2b2412803920);
+    /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceConfigure__default__unconfigure(arg_0x2b747ccce920);
 #line 65
 }
 #line 65
@@ -15659,13 +15671,13 @@ static inline error_t /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource_
 }
 
 # 120 "/usr/src/tinyos/tos/interfaces/Resource.nc"
-inline static error_t Atm128SpiP__ResourceArbiter__release(uint8_t arg_0x2b241271d060){
+inline static error_t Atm128SpiP__ResourceArbiter__release(uint8_t arg_0x2b747cbe8060){
 #line 120
   unsigned char __nesc_result;
 #line 120
 
 #line 120
-  __nesc_result = /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__release(arg_0x2b241271d060);
+  __nesc_result = /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__release(arg_0x2b747cbe8060);
 #line 120
 
 #line 120
@@ -15825,9 +15837,9 @@ static inline void RadioControlImplP__MacRx__default__enableRxDone(uint8_t clien
 }
 
 # 65 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
-inline static void RadioControlImplP__MacRx__enableRxDone(uint8_t arg_0x2b2411bd0020){
+inline static void RadioControlImplP__MacRx__enableRxDone(uint8_t arg_0x2b747c09b020){
 #line 65
-  switch (arg_0x2b2411bd0020) {
+  switch (arg_0x2b747c09b020) {
 #line 65
     case 0:
 #line 65
@@ -15849,7 +15861,7 @@ inline static void RadioControlImplP__MacRx__enableRxDone(uint8_t arg_0x2b2411bd
 #line 65
     default:
 #line 65
-      RadioControlImplP__MacRx__default__enableRxDone(arg_0x2b2411bd0020);
+      RadioControlImplP__MacRx__default__enableRxDone(arg_0x2b747c09b020);
 #line 65
       break;
 #line 65
@@ -16088,9 +16100,9 @@ static inline void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequ
 }
 
 # 53 "/usr/src/tinyos/tos/interfaces/ResourceRequested.nc"
-inline static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__requested(uint8_t arg_0x2b2412804408){
+inline static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__requested(uint8_t arg_0x2b747cccf408){
 #line 53
-    /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__default__requested(arg_0x2b2412804408);
+    /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__ResourceRequested__default__requested(arg_0x2b747cccf408);
 #line 53
 }
 #line 53
@@ -16128,13 +16140,13 @@ static inline error_t /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource_
 }
 
 # 88 "/usr/src/tinyos/tos/interfaces/Resource.nc"
-inline static error_t Atm128SpiP__ResourceArbiter__request(uint8_t arg_0x2b241271d060){
+inline static error_t Atm128SpiP__ResourceArbiter__request(uint8_t arg_0x2b747cbe8060){
 #line 88
   unsigned char __nesc_result;
 #line 88
 
 #line 88
-  __nesc_result = /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__request(arg_0x2b241271d060);
+  __nesc_result = /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__request(arg_0x2b747cbe8060);
 #line 88
 
 #line 88
@@ -16388,9 +16400,9 @@ static inline void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceC
 }
 
 # 65 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
-inline static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__unconfigure(uint8_t arg_0x2b2411c26538){
+inline static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__unconfigure(uint8_t arg_0x2b747c0f1538){
 #line 65
-    /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__default__unconfigure(arg_0x2b2411c26538);
+    /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__default__unconfigure(arg_0x2b747c0f1538);
 #line 65
 }
 #line 65
@@ -17551,13 +17563,13 @@ static inline uint32_t Alarm32khzTo62500hzTransformC__AlarmFrom__default__getAla
 }
 
 # 116 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
-inline static Alarm32khzTo62500hzTransformC__AlarmFrom__size_type Alarm32khzTo62500hzTransformC__AlarmFrom__getAlarm(uint8_t arg_0x2b2412ad0c38){
+inline static Alarm32khzTo62500hzTransformC__AlarmFrom__size_type Alarm32khzTo62500hzTransformC__AlarmFrom__getAlarm(uint8_t arg_0x2b747cf9bc38){
 #line 116
   unsigned long __nesc_result;
 #line 116
 
 #line 116
-  switch (arg_0x2b2412ad0c38) {
+  switch (arg_0x2b747cf9bc38) {
 #line 116
     case /*Ieee802154NonBeaconEnabledC.PHYAlarm2*/Alarm62500hz32VirtualizedC__0__CLIENT_ID:
 #line 116
@@ -17579,7 +17591,7 @@ inline static Alarm32khzTo62500hzTransformC__AlarmFrom__size_type Alarm32khzTo62
 #line 116
     default:
 #line 116
-      __nesc_result = Alarm32khzTo62500hzTransformC__AlarmFrom__default__getAlarm(arg_0x2b2412ad0c38);
+      __nesc_result = Alarm32khzTo62500hzTransformC__AlarmFrom__default__getAlarm(arg_0x2b747cf9bc38);
 #line 116
       break;
 #line 116
@@ -18773,13 +18785,14 @@ inline static ieee154_status_t ConectaEtrocaMsgP__MLME_ASSOCIATE__response(uint6
 #line 105
 }
 #line 105
-# 68 "ConectaEtrocaMsgP.nc"
+# 67 "ConectaEtrocaMsgP.nc"
 static inline void ConectaEtrocaMsgP__MLME_ASSOCIATE__indication(
 uint64_t DeviceAddress, 
 ieee154_CapabilityInformation_t CapabilityInformation, 
 ieee154_security_t *security)
 
 {
+
   ConectaEtrocaMsgP__MLME_ASSOCIATE__response(DeviceAddress, ConectaEtrocaMsgP__m_shortAddress++, IEEE154_ASSOCIATION_SUCCESSFUL, 0);
 }
 
@@ -19037,13 +19050,13 @@ static inline message_t *DispatchUnslottedCsmaP__FrameRx__default__received(uint
 }
 
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameRx.nc"
-inline static message_t *DispatchUnslottedCsmaP__FrameRx__received(uint8_t arg_0x2b2411c60ba0, message_t *frame){
+inline static message_t *DispatchUnslottedCsmaP__FrameRx__received(uint8_t arg_0x2b747c12bba0, message_t *frame){
 #line 43
   nx_struct message_t *__nesc_result;
 #line 43
 
 #line 43
-  switch (arg_0x2b2411c60ba0) {
+  switch (arg_0x2b747c12bba0) {
 #line 43
     case FC1_FRAMETYPE_DATA:
 #line 43
@@ -19083,7 +19096,7 @@ inline static message_t *DispatchUnslottedCsmaP__FrameRx__received(uint8_t arg_0
 #line 43
     default:
 #line 43
-      __nesc_result = DispatchUnslottedCsmaP__FrameRx__default__received(arg_0x2b2411c60ba0, frame);
+      __nesc_result = DispatchUnslottedCsmaP__FrameRx__default__received(arg_0x2b747c12bba0, frame);
 #line 43
       break;
 #line 43
@@ -19303,13 +19316,13 @@ static inline message_t *DispatchUnslottedCsmaP__FrameExtracted__default__receiv
 }
 
 # 43 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameExtracted.nc"
-inline static message_t *DispatchUnslottedCsmaP__FrameExtracted__received(uint8_t arg_0x2b2411c85bf8, message_t *rxFrame, ieee154_txframe_t *txFrame){
+inline static message_t *DispatchUnslottedCsmaP__FrameExtracted__received(uint8_t arg_0x2b747c150bf8, message_t *rxFrame, ieee154_txframe_t *txFrame){
 #line 43
   nx_struct message_t *__nesc_result;
 #line 43
 
 #line 43
-  switch (arg_0x2b2411c85bf8) {
+  switch (arg_0x2b747c150bf8) {
 #line 43
     case FC1_FRAMETYPE_DATA:
 #line 43
@@ -19331,7 +19344,7 @@ inline static message_t *DispatchUnslottedCsmaP__FrameExtracted__received(uint8_
 #line 43
     default:
 #line 43
-      __nesc_result = DispatchUnslottedCsmaP__FrameExtracted__default__received(arg_0x2b2411c85bf8, rxFrame, txFrame);
+      __nesc_result = DispatchUnslottedCsmaP__FrameExtracted__default__received(arg_0x2b747c150bf8, rxFrame, txFrame);
 #line 43
       break;
 #line 43
@@ -19453,13 +19466,13 @@ static inline message_t *RadioControlImplP__MacRx__default__received(uint8_t cli
 }
 
 # 84 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioRx.nc"
-inline static message_t *RadioControlImplP__MacRx__received(uint8_t arg_0x2b2411bd0020, message_t *frame){
+inline static message_t *RadioControlImplP__MacRx__received(uint8_t arg_0x2b747c09b020, message_t *frame){
 #line 84
   nx_struct message_t *__nesc_result;
 #line 84
 
 #line 84
-  switch (arg_0x2b2411bd0020) {
+  switch (arg_0x2b747c09b020) {
 #line 84
     case 0:
 #line 84
@@ -19481,7 +19494,7 @@ inline static message_t *RadioControlImplP__MacRx__received(uint8_t arg_0x2b2411
 #line 84
     default:
 #line 84
-      __nesc_result = RadioControlImplP__MacRx__default__received(arg_0x2b2411bd0020, frame);
+      __nesc_result = RadioControlImplP__MacRx__default__received(arg_0x2b747c09b020, frame);
 #line 84
       break;
 #line 84
@@ -19890,9 +19903,9 @@ static inline void Atm128SpiP__Resource__default__granted(uint8_t id)
 }
 
 # 102 "/usr/src/tinyos/tos/interfaces/Resource.nc"
-inline static void Atm128SpiP__Resource__granted(uint8_t arg_0x2b24126e6ae0){
+inline static void Atm128SpiP__Resource__granted(uint8_t arg_0x2b747cbb1ae0){
 #line 102
-  switch (arg_0x2b24126e6ae0) {
+  switch (arg_0x2b747cbb1ae0) {
 #line 102
     case 0U:
 #line 102
@@ -19902,7 +19915,7 @@ inline static void Atm128SpiP__Resource__granted(uint8_t arg_0x2b24126e6ae0){
 #line 102
     default:
 #line 102
-      Atm128SpiP__Resource__default__granted(arg_0x2b24126e6ae0);
+      Atm128SpiP__Resource__default__granted(arg_0x2b747cbb1ae0);
 #line 102
       break;
 #line 102
@@ -19918,9 +19931,9 @@ static inline void Atm128SpiP__ResourceArbiter__granted(uint8_t id)
 }
 
 # 102 "/usr/src/tinyos/tos/interfaces/Resource.nc"
-inline static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__granted(uint8_t arg_0x2b2412805258){
+inline static void /*Atm128SpiC.Arbiter.Arbiter*/SimpleArbiterP__0__Resource__granted(uint8_t arg_0x2b747ccd0258){
 #line 102
-  Atm128SpiP__ResourceArbiter__granted(arg_0x2b2412805258);
+  Atm128SpiP__ResourceArbiter__granted(arg_0x2b747ccd0258);
 #line 102
 }
 #line 102
@@ -20373,9 +20386,9 @@ static inline void CC2420SpiP__Fifo__default__readDone(uint8_t addr, uint8_t *rx
 }
 
 # 71 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
-inline static void CC2420SpiP__Fifo__readDone(uint8_t arg_0x2b2412641ca8, uint8_t * data, uint8_t length, error_t error){
+inline static void CC2420SpiP__Fifo__readDone(uint8_t arg_0x2b747cb0cca8, uint8_t * data, uint8_t length, error_t error){
 #line 71
-  switch (arg_0x2b2412641ca8) {
+  switch (arg_0x2b747cb0cca8) {
 #line 71
     case CC2420_TXFIFO:
 #line 71
@@ -20391,7 +20404,7 @@ inline static void CC2420SpiP__Fifo__readDone(uint8_t arg_0x2b2412641ca8, uint8_
 #line 71
     default:
 #line 71
-      CC2420SpiP__Fifo__default__readDone(arg_0x2b2412641ca8, data, length, error);
+      CC2420SpiP__Fifo__default__readDone(arg_0x2b747cb0cca8, data, length, error);
 #line 71
       break;
 #line 71
@@ -20500,9 +20513,9 @@ static inline void RadioControlImplP__MacTx__default__transmitDone(uint8_t clien
 }
 
 # 83 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioTx.nc"
-inline static void RadioControlImplP__MacTx__transmitDone(uint8_t arg_0x2b2411bcf060, ieee154_txframe_t *frame, error_t result){
+inline static void RadioControlImplP__MacTx__transmitDone(uint8_t arg_0x2b747c09a060, ieee154_txframe_t *frame, error_t result){
 #line 83
-  switch (arg_0x2b2411bcf060) {
+  switch (arg_0x2b747c09a060) {
 #line 83
     case 0:
 #line 83
@@ -20512,7 +20525,7 @@ inline static void RadioControlImplP__MacTx__transmitDone(uint8_t arg_0x2b2411bc
 #line 83
     default:
 #line 83
-      RadioControlImplP__MacTx__default__transmitDone(arg_0x2b2411bcf060, frame, result);
+      RadioControlImplP__MacTx__default__transmitDone(arg_0x2b747c09a060, frame, result);
 #line 83
       break;
 #line 83
@@ -20553,9 +20566,9 @@ ieee154_txframe_t *frame, ieee154_csma_t *csma, bool ackPendingFlag, error_t res
 }
 
 # 89 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/UnslottedCsmaCa.nc"
-inline static void RadioControlImplP__UnslottedCsmaCa__transmitDone(uint8_t arg_0x2b2411bcec20, ieee154_txframe_t *frame, ieee154_csma_t *csma, bool ackPendingFlag, error_t result){
+inline static void RadioControlImplP__UnslottedCsmaCa__transmitDone(uint8_t arg_0x2b747c099c20, ieee154_txframe_t *frame, ieee154_csma_t *csma, bool ackPendingFlag, error_t result){
 #line 89
-  switch (arg_0x2b2411bcec20) {
+  switch (arg_0x2b747c099c20) {
 #line 89
     case 12U:
 #line 89
@@ -20565,7 +20578,7 @@ inline static void RadioControlImplP__UnslottedCsmaCa__transmitDone(uint8_t arg_
 #line 89
     default:
 #line 89
-      RadioControlImplP__UnslottedCsmaCa__default__transmitDone(arg_0x2b2411bcec20, frame, csma, ackPendingFlag, result);
+      RadioControlImplP__UnslottedCsmaCa__default__transmitDone(arg_0x2b747c099c20, frame, csma, ackPendingFlag, result);
 #line 89
       break;
 #line 89
@@ -20730,9 +20743,9 @@ static inline void CC2420SpiP__Fifo__default__writeDone(uint8_t addr, uint8_t *t
 }
 
 # 91 "/usr/src/tinyos/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
-inline static void CC2420SpiP__Fifo__writeDone(uint8_t arg_0x2b2412641ca8, uint8_t * data, uint8_t length, error_t error){
+inline static void CC2420SpiP__Fifo__writeDone(uint8_t arg_0x2b747cb0cca8, uint8_t * data, uint8_t length, error_t error){
 #line 91
-  switch (arg_0x2b2412641ca8) {
+  switch (arg_0x2b747cb0cca8) {
 #line 91
     case CC2420_TXFIFO:
 #line 91
@@ -20748,7 +20761,7 @@ inline static void CC2420SpiP__Fifo__writeDone(uint8_t arg_0x2b2412641ca8, uint8
 #line 91
     default:
 #line 91
-      CC2420SpiP__Fifo__default__writeDone(arg_0x2b2412641ca8, data, length, error);
+      CC2420SpiP__Fifo__default__writeDone(arg_0x2b747cb0cca8, data, length, error);
 #line 91
       break;
 #line 91
@@ -21324,9 +21337,9 @@ static inline void Alarm32khzTo62500hzTransformC__AlarmFrom__default__start(uint
 }
 
 # 66 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
-inline static void Alarm32khzTo62500hzTransformC__AlarmFrom__start(uint8_t arg_0x2b2412ad0c38, Alarm32khzTo62500hzTransformC__AlarmFrom__size_type dt){
+inline static void Alarm32khzTo62500hzTransformC__AlarmFrom__start(uint8_t arg_0x2b747cf9bc38, Alarm32khzTo62500hzTransformC__AlarmFrom__size_type dt){
 #line 66
-  switch (arg_0x2b2412ad0c38) {
+  switch (arg_0x2b747cf9bc38) {
 #line 66
     case /*Ieee802154NonBeaconEnabledC.PHYAlarm2*/Alarm62500hz32VirtualizedC__0__CLIENT_ID:
 #line 66
@@ -21348,7 +21361,7 @@ inline static void Alarm32khzTo62500hzTransformC__AlarmFrom__start(uint8_t arg_0
 #line 66
     default:
 #line 66
-      Alarm32khzTo62500hzTransformC__AlarmFrom__default__start(arg_0x2b2412ad0c38, dt);
+      Alarm32khzTo62500hzTransformC__AlarmFrom__default__start(arg_0x2b747cf9bc38, dt);
 #line 66
       break;
 #line 66
@@ -21526,9 +21539,9 @@ static inline void CC2420SpiP__Resource__default__granted(uint8_t id)
 }
 
 # 102 "/usr/src/tinyos/tos/interfaces/Resource.nc"
-inline static void CC2420SpiP__Resource__granted(uint8_t arg_0x2b2412642a68){
+inline static void CC2420SpiP__Resource__granted(uint8_t arg_0x2b747cb0da68){
 #line 102
-  switch (arg_0x2b2412642a68) {
+  switch (arg_0x2b747cb0da68) {
 #line 102
     case /*CC2420ControlTransmitC.Spi*/CC2420SpiC__0__CLIENT_ID:
 #line 102
@@ -21544,7 +21557,7 @@ inline static void CC2420SpiP__Resource__granted(uint8_t arg_0x2b2412642a68){
 #line 102
     default:
 #line 102
-      CC2420SpiP__Resource__default__granted(arg_0x2b2412642a68);
+      CC2420SpiP__Resource__default__granted(arg_0x2b747cb0da68);
 #line 102
       break;
 #line 102
@@ -22388,9 +22401,9 @@ static inline void RadioControlImplP__MacRadioOff__default__offDone(uint8_t clie
 }
 
 # 53 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/RadioOff.nc"
-inline static void RadioControlImplP__MacRadioOff__offDone(uint8_t arg_0x2b2411bcc9b8){
+inline static void RadioControlImplP__MacRadioOff__offDone(uint8_t arg_0x2b747c0979b8){
 #line 53
-  switch (arg_0x2b2411bcc9b8) {
+  switch (arg_0x2b747c0979b8) {
 #line 53
     case 0:
 #line 53
@@ -22418,7 +22431,7 @@ inline static void RadioControlImplP__MacRadioOff__offDone(uint8_t arg_0x2b2411b
 #line 53
     default:
 #line 53
-      RadioControlImplP__MacRadioOff__default__offDone(arg_0x2b2411bcc9b8);
+      RadioControlImplP__MacRadioOff__default__offDone(arg_0x2b747c0979b8);
 #line 53
       break;
 #line 53
@@ -22958,6 +22971,30 @@ inline static ieee154_status_t ConectaEtrocaMsgP__MLME_START__request(uint16_t P
 #line 89
 }
 #line 89
+# 460 "/usr/src/tinyos/tos/lib/mac/tkn154/PibP.nc"
+static inline ieee154_status_t PibP__MLME_SET__macRxOnWhenIdle(ieee154_macRxOnWhenIdle_t value)
+#line 460
+{
+  PibP__m_pib.macRxOnWhenIdle = value;
+  PibP__PIBUpdate__notify(IEEE154_macRxOnWhenIdle, & PibP__m_pib.macRxOnWhenIdle);
+  return IEEE154_SUCCESS;
+}
+
+# 146 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_SET.nc"
+inline static ieee154_status_t ConectaEtrocaMsgP__MLME_SET__macRxOnWhenIdle(ieee154_macRxOnWhenIdle_t value){
+#line 146
+  enum ieee154_status __nesc_result;
+#line 146
+
+#line 146
+  __nesc_result = PibP__MLME_SET__macRxOnWhenIdle(value);
+#line 146
+
+#line 146
+  return __nesc_result;
+#line 146
+}
+#line 146
 # 372 "/usr/src/tinyos/tos/lib/mac/tkn154/PibP.nc"
 static inline ieee154_status_t PibP__MLME_SET__macAssociationPermit(ieee154_macAssociationPermit_t value)
 #line 372
@@ -22997,30 +23034,6 @@ inline static ieee154_status_t ConectaEtrocaMsgP__MLME_SET__macShortAddress(ieee
 #line 151
 }
 #line 151
-# 350 "/usr/src/tinyos/tos/lib/mac/tkn154/PibP.nc"
-static inline ieee154_status_t PibP__MLME_SET__phyTransmitPower(ieee154_phyTransmitPower_t value)
-#line 350
-{
-  PibP__m_pib.phyTransmitPower = value & 0x3F;
-  PibP__PIBUpdate__notify(IEEE154_phyTransmitPower, & PibP__m_pib.phyTransmitPower);
-  return IEEE154_SUCCESS;
-}
-
-# 60 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_SET.nc"
-inline static ieee154_status_t ConectaEtrocaMsgP__MLME_SET__phyTransmitPower(ieee154_phyTransmitPower_t value){
-#line 60
-  enum ieee154_status __nesc_result;
-#line 60
-
-#line 60
-  __nesc_result = PibP__MLME_SET__phyTransmitPower(value);
-#line 60
-
-#line 60
-  return __nesc_result;
-#line 60
-}
-#line 60
 # 38 "ConectaEtrocaMsgP.nc"
 static inline void ConectaEtrocaMsgP__MLME_RESET__confirm(ieee154_status_t status)
 {
@@ -23028,18 +23041,17 @@ static inline void ConectaEtrocaMsgP__MLME_RESET__confirm(ieee154_status_t statu
     return;
     }
 #line 42
-  ConectaEtrocaMsgP__MLME_SET__phyTransmitPower(TX_POWER);
   ConectaEtrocaMsgP__MLME_SET__macShortAddress(COORDINATOR_ADDRESS);
   ConectaEtrocaMsgP__MLME_SET__macAssociationPermit(TRUE);
-
+  ConectaEtrocaMsgP__MLME_SET__macRxOnWhenIdle(TRUE);
 
   ConectaEtrocaMsgP__MLME_START__request(
   PAN_ID, 
   RADIO_CHANNEL, 
   0, 
   0, 
-  BEACON_ORDER, 
-  SUPERFRAME_ORDER, 
+  15, 
+  15, 
   TRUE, 
   FALSE, 
   FALSE, 
@@ -23941,10 +23953,44 @@ static inline void /*TKN154NonBeaconEnabledP.DispatchQueueP*/DispatchQueueP__0__
     }
 }
 
-# 62 "ConectaEtrocaMsgP.nc"
-static inline void ConectaEtrocaMsgP__MLME_START__confirm(ieee154_status_t status)
-#line 62
+# 56 "/usr/src/tinyos/tos/chips/atm128/pins/HplAtm128GeneralIOPinP.nc"
+static __inline void /*HplAtm128GeneralIOC.PortA.Bit2*/HplAtm128GeneralIOPinP__2__IO__clr(void )
+#line 56
 {
+#line 56
+  * (volatile uint8_t * )59U &= ~(1 << 2);
+}
+
+# 41 "/usr/src/tinyos/tos/interfaces/GeneralIO.nc"
+inline static void LedsP__Led0__clr(void ){
+#line 41
+  /*HplAtm128GeneralIOC.PortA.Bit2*/HplAtm128GeneralIOPinP__2__IO__clr();
+#line 41
+}
+#line 41
+# 74 "/usr/src/tinyos/tos/system/LedsP.nc"
+static inline void LedsP__Leds__led0On(void )
+#line 74
+{
+  LedsP__Led0__clr();
+  ;
+#line 76
+  ;
+}
+
+# 56 "/usr/src/tinyos/tos/interfaces/Leds.nc"
+inline static void ConectaEtrocaMsgP__Leds__led0On(void ){
+#line 56
+  LedsP__Leds__led0On();
+#line 56
+}
+#line 56
+# 61 "ConectaEtrocaMsgP.nc"
+static inline void ConectaEtrocaMsgP__MLME_START__confirm(ieee154_status_t status)
+#line 61
+{
+#line 61
+  ConectaEtrocaMsgP__Leds__led0On();
 }
 
 # 111 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/MLME/MLME_START.nc"
@@ -24159,9 +24205,9 @@ static inline void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource_
 }
 
 # 98 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/TransferableResource.nc"
-inline static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource__granted(uint8_t arg_0x2b2411c2aad8){
+inline static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource__granted(uint8_t arg_0x2b747c0f5ad8){
 #line 98
-  switch (arg_0x2b2411c2aad8) {
+  switch (arg_0x2b747c0f5ad8) {
 #line 98
     case 0:
 #line 98
@@ -24189,7 +24235,7 @@ inline static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource_
 #line 98
     default:
 #line 98
-      /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource__default__granted(arg_0x2b2411c2aad8);
+      /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__Resource__default__granted(arg_0x2b747c0f5ad8);
 #line 98
       break;
 #line 98
@@ -24204,9 +24250,9 @@ static inline void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceC
 }
 
 # 59 "/usr/src/tinyos/tos/interfaces/ResourceConfigure.nc"
-inline static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__configure(uint8_t arg_0x2b2411c26538){
+inline static void /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__configure(uint8_t arg_0x2b747c0f1538){
 #line 59
-    /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__default__configure(arg_0x2b2411c26538);
+    /*RadioControlP.Arbiter*/SimpleTransferArbiterP__0__ResourceConfigure__default__configure(arg_0x2b747c0f1538);
 #line 59
 }
 #line 59
@@ -25329,9 +25375,9 @@ static inline void Alarm32khzTo62500hzTransformC__Alarm__default__fired(uint8_t 
 }
 
 # 78 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
-inline static void Alarm32khzTo62500hzTransformC__Alarm__fired(uint8_t arg_0x2b2412ad4448){
+inline static void Alarm32khzTo62500hzTransformC__Alarm__fired(uint8_t arg_0x2b747cf9f448){
 #line 78
-  switch (arg_0x2b2412ad4448) {
+  switch (arg_0x2b747cf9f448) {
 #line 78
     case /*Ieee802154NonBeaconEnabledC.PHYAlarm2*/Alarm62500hz32VirtualizedC__0__CLIENT_ID:
 #line 78
@@ -25353,7 +25399,7 @@ inline static void Alarm32khzTo62500hzTransformC__Alarm__fired(uint8_t arg_0x2b2
 #line 78
     default:
 #line 78
-      Alarm32khzTo62500hzTransformC__Alarm__default__fired(arg_0x2b2412ad4448);
+      Alarm32khzTo62500hzTransformC__Alarm__default__fired(arg_0x2b747cf9f448);
 #line 78
       break;
 #line 78
@@ -25376,9 +25422,9 @@ static inline void /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC
 }
 
 # 78 "/usr/src/tinyos/tos/lib/timer/Alarm.nc"
-inline static void /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__fired(uint8_t arg_0x2b2412b621a0){
+inline static void /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__fired(uint8_t arg_0x2b747d02d1a0){
 #line 78
-  switch (arg_0x2b2412b621a0) {
+  switch (arg_0x2b747d02d1a0) {
 #line 78
     case /*Ieee802154NonBeaconEnabledC.PHYAlarm2*/Alarm62500hz32VirtualizedC__0__CLIENT_ID:
 #line 78
@@ -25400,7 +25446,7 @@ inline static void /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC
 #line 78
     default:
 #line 78
-      /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__default__fired(arg_0x2b2412b621a0);
+      /*Alarm32khz32VirtualizedP.VirtualizeAlarmC*/VirtualizeAlarmC__0__Alarm__default__fired(arg_0x2b747d02d1a0);
 #line 78
       break;
 #line 78
@@ -27883,9 +27929,9 @@ static void SchedulerBasicP__TaskBasic__default__runTask(uint8_t id)
 }
 
 # 75 "/usr/src/tinyos/tos/interfaces/TaskBasic.nc"
-static void SchedulerBasicP__TaskBasic__runTask(uint8_t arg_0x2b2411567ab0){
+static void SchedulerBasicP__TaskBasic__runTask(uint8_t arg_0x2b747ba32ab0){
 #line 75
-  switch (arg_0x2b2411567ab0) {
+  switch (arg_0x2b747ba32ab0) {
 #line 75
     case PibP__radioControlStopTask:
 #line 75
@@ -28105,7 +28151,7 @@ static void SchedulerBasicP__TaskBasic__runTask(uint8_t arg_0x2b2411567ab0){
 #line 75
     default:
 #line 75
-      SchedulerBasicP__TaskBasic__default__runTask(arg_0x2b2411567ab0);
+      SchedulerBasicP__TaskBasic__default__runTask(arg_0x2b747ba32ab0);
 #line 75
       break;
 #line 75
@@ -29982,9 +30028,9 @@ static void PibP__PIBUpdate__default__notify(uint8_t PIBAttributeID, const void 
 }
 
 # 74 "/usr/src/tinyos/tos/interfaces/Notify.nc"
-static void PibP__PIBUpdate__notify(uint8_t arg_0x2b24119e5d98, PibP__PIBUpdate__val_t val){
+static void PibP__PIBUpdate__notify(uint8_t arg_0x2b747beb0d98, PibP__PIBUpdate__val_t val){
 #line 74
-  switch (arg_0x2b24119e5d98) {
+  switch (arg_0x2b747beb0d98) {
 #line 74
     case IEEE154_phyCurrentChannel:
 #line 74
@@ -30030,7 +30076,7 @@ static void PibP__PIBUpdate__notify(uint8_t arg_0x2b24119e5d98, PibP__PIBUpdate_
 #line 74
     default:
 #line 74
-      PibP__PIBUpdate__default__notify(arg_0x2b24119e5d98, val);
+      PibP__PIBUpdate__default__notify(arg_0x2b747beb0d98, val);
 #line 74
       break;
 #line 74
@@ -31288,9 +31334,9 @@ static void /*TKN154NonBeaconEnabledP.DispatchQueueP*/DispatchQueueP__0__FrameTx
 }
 
 # 51 "/usr/src/tinyos/tos/lib/mac/tkn154/interfaces/private/FrameTx.nc"
-static void /*TKN154NonBeaconEnabledP.DispatchQueueP*/DispatchQueueP__0__FrameTx__transmitDone(uint8_t arg_0x2b2411d2f350, ieee154_txframe_t *txFrame, ieee154_status_t status){
+static void /*TKN154NonBeaconEnabledP.DispatchQueueP*/DispatchQueueP__0__FrameTx__transmitDone(uint8_t arg_0x2b747c1fa350, ieee154_txframe_t *txFrame, ieee154_status_t status){
 #line 51
-  switch (arg_0x2b2411d2f350) {
+  switch (arg_0x2b747c1fa350) {
 #line 51
     case 0U:
 #line 51
@@ -31348,7 +31394,7 @@ static void /*TKN154NonBeaconEnabledP.DispatchQueueP*/DispatchQueueP__0__FrameTx
 #line 51
     default:
 #line 51
-      /*TKN154NonBeaconEnabledP.DispatchQueueP*/DispatchQueueP__0__FrameTx__default__transmitDone(arg_0x2b2411d2f350, txFrame, status);
+      /*TKN154NonBeaconEnabledP.DispatchQueueP*/DispatchQueueP__0__FrameTx__default__transmitDone(arg_0x2b747c1fa350, txFrame, status);
 #line 51
       break;
 #line 51

@@ -39,18 +39,17 @@ module ConectaEtrocaMsgP
   {
     if (status != IEEE154_SUCCESS)
       return;
-    call MLME_SET.phyTransmitPower(TX_POWER);
     call MLME_SET.macShortAddress(COORDINATOR_ADDRESS);
     call MLME_SET.macAssociationPermit(TRUE);
-    //call MLME_SET.macRxOnWhenIdle(TRUE);
+    call MLME_SET.macRxOnWhenIdle(TRUE);
 
     call MLME_START.request(
                           PAN_ID,               // PANId
                           RADIO_CHANNEL,        // LogicalChannel
                           0,                    // ChannelPage,
                           0,                    // StartTime,
-                          BEACON_ORDER,         // BeaconOrder
-                          SUPERFRAME_ORDER,     // SuperframeOrder
+                          15,         // BeaconOrder
+                          15,     // SuperframeOrder
                           TRUE,                 // PANCoordinator
                           FALSE,                // BatteryLifeExtension
                           FALSE,                // CoordRealignment
@@ -59,7 +58,7 @@ module ConectaEtrocaMsgP
                         );
   }
 
-  event void MLME_START.confirm(ieee154_status_t status) {}
+  event void MLME_START.confirm(ieee154_status_t status) {    call Leds.led0On();}
 
 /**********Associação*************/
   uint16_t m_shortAddress;
@@ -71,6 +70,7 @@ module ConectaEtrocaMsgP
                           ieee154_security_t *security
                         )
   {
+    //call Leds.led1On();
     call MLME_ASSOCIATE.response(DeviceAddress, m_shortAddress++, IEEE154_ASSOCIATION_SUCCESSFUL, 0);
   }
 
@@ -119,7 +119,7 @@ module ConectaEtrocaMsgP
 /*********Recepção de dados***********/
 
 
-  bool m_ledCount;
+  bool m_ledCount=0;
   event message_t* MCPS_DATA.indication ( message_t* frame )
   {	
     if (m_ledCount++ >= 20) {

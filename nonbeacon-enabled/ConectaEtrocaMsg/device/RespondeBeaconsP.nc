@@ -44,6 +44,7 @@
 #include "TKN154.h"
 #include "app_profile.h"
 #include "printf.h"
+
 module RespondeBeaconsP
 {
   uses {
@@ -52,12 +53,10 @@ module RespondeBeaconsP
     interface MLME_RESET;
     interface MLME_SET;
     interface MLME_GET;
-    interface MLME_SCAN;
-    interface MLME_SYNC;
-    interface MLME_BEACON_NOTIFY;
-    interface MLME_SYNC_LOSS;
+    interface MLME_ASSOCIATE;
+    interface MLME_DISASSOCIATE;
+    interface MLME_COMM_STATUS;
     interface IEEE154Frame as Frame;
-    interface IEEE154BeaconFrame as BeaconFrame;
     interface Leds;
     interface Packet;
   }
@@ -67,7 +66,7 @@ module RespondeBeaconsP
   uint8_t m_payloadLen;
   ieee154_PANDescriptor_t m_PANDescriptor;
   bool m_ledCount;
-  bool m_wasScanSuccessful;
+  ieee154_CapabilityInformation_t m_capabilityInformation;
 
   void startApp();
   task void packetSendTask();
@@ -76,6 +75,14 @@ module RespondeBeaconsP
   event void Boot.booted() {
     char payload[] = "Hello Coordinator!";
     uint8_t *payloadRegion;
+
+    m_capabilityInformation.AlternatePANCoordinator = 0;
+    m_capabilityInformation.DeviceType = 0;
+    m_capabilityInformation.PowerSource = 0;
+    m_capabilityInformation.ReceiverOnWhenIdle = 0;
+    m_capabilityInformation.Reserved = 0;
+    m_capabilityInformation.SecurityCapability = 0;
+    m_capabilityInformation.AllocateAddress = 1;    
 
     m_payloadLen = strlen(payload);
     payloadRegion = call Packet.getPayload(&m_frame, m_payloadLen);
@@ -93,78 +100,33 @@ module RespondeBeaconsP
 
   void startApp()
   {
-    ieee154_phyChannelsSupported_t channelMask;
-    uint8_t scanDuration = BEACON_ORDER;
+    ieee154_address_t coordAdr;
 
-    call MLME_SET.phyTransmitPower(TX_POWER);
-    call MLME_SET.macShortAddress(TOS_NODE_ID);
-
-    // scan only the channel where we expect the coordinator
-    channelMask = ((uint32_t) 1) << RADIO_CHANNEL;
-
-    // we want all received beacons to be signalled 
-    // through the MLME_BEACON_NOTIFY interface, i.e.
-    // we set the macAutoRequest attribute to FALSE
+    coordAdr.shortAddress = COORDINATOR_ADDRESS;
+    call MLME_SET.phyCurrentChannel(RADIO_CHANNEL);
     call MLME_SET.macAutoRequest(FALSE);
-    m_wasScanSuccessful = FALSE;
-    call MLME_SCAN.request  (
-                           PASSIVE_SCAN,           // ScanType
-                           channelMask,            // ScanChannels
-                           scanDuration,           // ScanDuration
-                           0x00,                   // ChannelPage
-                           0,                      // EnergyDetectListNumEntries
-                           NULL,                   // EnergyDetectList
-                           0,                      // PANDescriptorListNumEntries
-                           NULL,                   // PANDescriptorList
-                           0                       // security
-                        );
+    call MLME_SET.macPANId(PAN_ID);
+    call MLME_SET.macCoordShortAddress(COORDINATOR_ADDRESS);
+    call MLME_ASSOCIATE.request(
+          RADIO_CHANNEL,
+          call MLME_GET.phyCurrentPage(),
+          ADDR_MODE_SHORT_ADDRESS,
+          PAN_ID,
+          coordAdr,
+          m_capabilityInformation,
+          NULL  // security
+          );    
   }
 
-  event message_t* MLME_BEACON_NOTIFY.indication (message_t* frame)
-  { 
-    // received a beacon frame
-    ieee154_phyCurrentPage_t page = call MLME_GET.phyCurrentPage();
-    ieee154_macBSN_t beaconSequenceNumber = call BeaconFrame.getBSN(frame);
-
-    printf("Sequencia do beacon recebido: %hu ! \n", beaconSequenceNumber);
-
-    if (!m_wasScanSuccessful) {
-      // received a beacon during channel scanning
-      if (call BeaconFrame.parsePANDescriptor(
-            frame, RADIO_CHANNEL, page, &m_PANDescriptor) == SUCCESS) {
-        // let's see if the beacon is from our coordinator...
-        if (m_PANDescriptor.CoordAddrMode == ADDR_MODE_SHORT_ADDRESS &&
-            m_PANDescriptor.CoordPANId == PAN_ID &&
-            m_PANDescriptor.CoordAddress.shortAddress == COORDINATOR_ADDRESS){
-          // yes! wait until SCAN is finished, then syncronize to the beacons
-          m_wasScanSuccessful = TRUE;
-        }
-      }
-    } else { 
-      // received a beacon during synchronization, toggle LED1
-      call Leds.led1Toggle();
-
-    }
-
-    return frame;
-  }
-
-  event void MLME_SCAN.confirm    (
-                          ieee154_status_t status,
-                          uint8_t ScanType,
-                          uint8_t ChannelPage,
-                          uint32_t UnscannedChannels,
-                          uint8_t EnergyDetectListNumEntries,
-                          int8_t* EnergyDetectList,
-                          uint8_t PANDescriptorListNumEntries,
-                          ieee154_PANDescriptor_t* PANDescriptorList
+  event void MLME_ASSOCIATE.confirm    (
+                          uint16_t AssocShortAddress,
+                          uint8_t status,
+                          ieee154_security_t *security
                         )
   {
-    if (m_wasScanSuccessful) {
-      // we received a beacon from the coordinator before
-      call MLME_SET.macCoordShortAddress(m_PANDescriptor.CoordAddress.shortAddress);
-      call MLME_SET.macPANId(m_PANDescriptor.CoordPANId);
-      call MLME_SYNC.request(m_PANDescriptor.LogicalChannel, m_PANDescriptor.ChannelPage, TRUE);
+    if ( status == IEEE154_SUCCESS ){
+      call Leds.led1On();
+
       call Frame.setAddressingFields(
           &m_frame,                
           ADDR_MODE_SHORT_ADDRESS,        // SrcAddrMode,
@@ -174,24 +136,77 @@ module RespondeBeaconsP
           NULL                            // security
           );
       post packetSendTask(); 
-    } else
-      startApp();
+
+    } else {
+      call Leds.led0On();
+      startApp(); // retry
+    }
   }
 
+  event void MLME_DISASSOCIATE.confirm    (
+                          ieee154_status_t status,
+                          uint8_t DeviceAddrMode,
+                          uint16_t DevicePANID,
+                          ieee154_address_t DeviceAddress
+                        )
+  {
+    if (status == IEEE154_SUCCESS){
+      call Leds.led1Off();
+    } 
+  }
+
+  event void MLME_ASSOCIATE.indication (
+                          uint64_t DeviceAddress,
+                          ieee154_CapabilityInformation_t CapabilityInformation,
+                          ieee154_security_t *security
+                        ){}  
+
+  event void MLME_DISASSOCIATE.indication (
+                          uint64_t DeviceAddress,
+                          ieee154_disassociation_reason_t DisassociateReason,
+                          ieee154_security_t *security
+                        ){}
+
+
+  event void MLME_COMM_STATUS.indication (
+                          uint16_t PANId,
+                          uint8_t SrcAddrMode,
+                          ieee154_address_t SrcAddr,
+                          uint8_t DstAddrMode,
+                          ieee154_address_t DstAddr,
+                          ieee154_status_t status,
+                          ieee154_security_t *security
+                        ) {}
+
+
+//*************************DADOS*********************************
   task void packetSendTask()
   {
-    if (!m_wasScanSuccessful)
-      return;
-    else if (call MCPS_DATA.request  (
+
+    ieee154_address_t coordAdr;
+
+    coordAdr.shortAddress = COORDINATOR_ADDRESS;
+    call Frame.setAddressingFields(
+                          &m_frame,                
+                          ADDR_MODE_SHORT_ADDRESS,     // SrcAddrMode,
+                          ADDR_MODE_SHORT_ADDRESS,     // DstAddrMode,
+                          PAN_ID,                      // DstPANId,
+                          &coordAdr,              	// DstAddr,
+                          NULL                         // security
+                        );
+
+       if (call MCPS_DATA.request  (
           &m_frame,                         // frame,
           m_payloadLen,                     // payloadLength,
           0,                                // msduHandle,
           TX_OPTIONS_ACK // TxOptions,
           ) != IEEE154_SUCCESS)
       		call Leds.led0On();
-	//else
-	//	printf("Frame enviado com sucesso! Conteúdo da mensagem: %s ! \n", call Frame.getPayload(&m_frame));
-  }
+	else{
+		//printf("Frame enviado com sucesso! Conteúdo da mensagem: %s ! \n", call Frame.getPayload(&m_frame));
+		//call Leds.led2Toggle();
+	} 
+ }
 
   event void MCPS_DATA.confirm    (
                           message_t *msg,
@@ -204,20 +219,10 @@ module RespondeBeaconsP
       m_ledCount = 0;
       call Leds.led2Toggle();
     }
+    call Leds.led0Toggle();
     post packetSendTask(); 
   }
 
-  event void MLME_SYNC_LOSS.indication(
-                          ieee154_status_t lossReason,
-                          uint16_t PANId,
-                          uint8_t LogicalChannel,
-                          uint8_t ChannelPage,
-                          ieee154_security_t *security)
-  {
-    m_wasScanSuccessful = FALSE;
-    call Leds.led1Off();
-    call Leds.led2Off();
-  }
 
   event message_t* MCPS_DATA.indication (message_t* frame)
   {
